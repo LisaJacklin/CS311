@@ -5,3 +5,12 @@
 //Objective: High-Quality Class
 //CS 311 Data Structures and Analysis
 //Homework 1
+
+class Player {
+	Player(const std::string & playerName){}
+
+	Player(const std::string & playerUsername) {}
+
+	Player(int& gamesPlayed) {}
+
+}; //end of class Player
