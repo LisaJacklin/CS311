@@ -1,5 +1,5 @@
 // timeofday.hpp  UNFINISHED
-// Glenn G. Chappell
+// Glenn G. Chappell adjusted by Lisa Jacklin
 // 2023-09-01
 //
 // For CS 311 Fall 2023
@@ -38,6 +38,7 @@ public:
               int ss)
     {
         // TODO: WRITE THIS!!!
+        
     }
 
 // ***** TimeOfDay: General public operators *****
@@ -48,12 +49,14 @@ public:
     TimeOfDay & operator++()
     {
         ++_secs;
-        _secs %= 24*60*60;
+        _secs %= 24*60*60; //this gives the number of seconds in a day
         return *this;
     }
 
     // op++ [post]
     // Move time one second forward.
+    //within two sets or brackets is an attribute
+    //the point of this double bracket attribute is to avoid warnings
     TimeOfDay operator++([[maybe_unused]] int dummy)
     {
         auto save = *this;
@@ -89,7 +92,11 @@ public:
                  int & mm,
                  int & ss) const
     {
-        // TODO: WRITE THIS!!!
+        //this is where time is computed
+        hh = _secs / (60 * 60); //if it fits within minutes and seconds
+        mm = (_secs - hh*(60*60)) /60; //seconds - total seconds in the hours in hh, divided by total seconds in minute
+        ss = _secs % (24 * 60); //the remainder is seconds from hours and minutes
+
     }
 
     // setTime
@@ -98,7 +105,10 @@ public:
                  int mm,
                  int ss)
     {
-        // TODO: WRITE THIS!!!
+        _secs = 60 * 60 * hh + 60 * mm + ss;
+        //note this will work so long as values are within range, thus we need to make sure we add asserts to 
+        //make sure that this will not happen.
+
     }
 
 // ***** TimeOfDay: Data members *****

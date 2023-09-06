@@ -23,8 +23,5 @@
     <ClCompile Include="timeofday.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="timeofday_main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

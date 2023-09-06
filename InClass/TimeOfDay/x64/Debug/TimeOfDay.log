@@ -1,0 +1,5 @@
+﻿  timeofday.cpp
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(60,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(79,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\x64\Debug\TimeOfDay.exe : fatal error LNK1120: 1 unresolved externals
