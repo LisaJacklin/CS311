@@ -11,6 +11,8 @@
 
 #include <ostream>
 // For std::ostream
+#include <cassert>
+//for assert
 
 
 // *********************************************************************
@@ -41,6 +43,11 @@ public:
               int mm,
               int ss)
     {
+        //note that here we need to limit the values of hh, mm, ss are allowed to be done.
+        assert(0 <= hh && hh < 24); 
+        assert(0 <= mm && mm < 60);
+        assert(0 <= ss && ss < 60);
+
         setTime(hh, mm, ss);
 
     }
@@ -52,6 +59,9 @@ public:
     // Move time one second forward.
     TimeOfDay & operator++()
     {
+        //to make sure that seconds cannot go past 24 hours in a day...only up to 23:59:59
+        assert(0 <= _secs && _secs < 24 * 60 * 60);
+
         ++_secs;
         _secs %= 24*60*60; //this gives the number of seconds in a day
         return *this;
@@ -90,7 +100,7 @@ public:
 // ***** TimeOfDay: General public functions *****
 public:
 
- 
+    void getTime(int hh, int mm, int ss) const;
 
     // setTime
     // Set time to given # of hours, minutes, seconds past midnight.

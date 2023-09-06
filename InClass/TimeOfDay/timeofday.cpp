@@ -15,10 +15,12 @@ using std::ostream;
  // Return hours, minutes, seconds in reference parameters.
  //note that this sort of definition should really be in the source file.
  //once again, this is the judgement call.
-void getTime(int& hh,
-    int& mm,
-    int& ss) const
+void TimeOfDay::getTime(int& hh, int& mm,  int& ss) const
 {
+
+    //to make sure that seconds cannot go past 24 hours in a day...only up to 23:59:59
+    assert(0 <= _secs && _secs < 24 * 60 * 60);
+
     //this is where time is computed
     hh = _secs / (60 * 60); //if it fits within minutes and seconds
     mm = (_secs - hh * (60 * 60)) / 60; //seconds - total seconds in the hours in hh, divided by total seconds in minute
