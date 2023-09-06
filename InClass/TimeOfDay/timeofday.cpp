@@ -11,6 +11,21 @@
 #include <ostream>
 using std::ostream;
 
+// getTime
+ // Return hours, minutes, seconds in reference parameters.
+ //note that this sort of definition should really be in the source file.
+ //once again, this is the judgement call.
+void getTime(int& hh,
+    int& mm,
+    int& ss) const
+{
+    //this is where time is computed
+    hh = _secs / (60 * 60); //if it fits within minutes and seconds
+    mm = (_secs - hh * (60 * 60)) / 60; //seconds - total seconds in the hours in hh, divided by total seconds in minute
+    ss = _secs % (24 * 60) - mm * (60); //the remainder is seconds from hours and minutes
+
+}
+
 
 // *********************************************************************
 // class TimeOfDay - Definitions of associated global operators

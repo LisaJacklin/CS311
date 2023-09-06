@@ -28,8 +28,12 @@ public:
     // Default ctor
     // Set time to midnight.
     TimeOfDay()
-        :_secs(0)
-    {}
+       // :_secs(0)
+    {
+        setTime(0, 0, 0): //this is a jugement call where you use this, or :_secs(0)....
+        //although there is no real difference between these two, :_secs(0) means all other operations are reliant on this single value
+        //which is the case in setTime but why not use it since we built it.
+    }
 
     // Ctor from hours, minutes, seconds
     // Set time to given # of hours, minutes, seconds past midnight.
@@ -37,8 +41,8 @@ public:
               int mm,
               int ss)
     {
-        // TODO: WRITE THIS!!!
-        
+        setTime(hh, mm, ss);
+
     }
 
 // ***** TimeOfDay: General public operators *****
@@ -86,18 +90,7 @@ public:
 // ***** TimeOfDay: General public functions *****
 public:
 
-    // getTime
-    // Return hours, minutes, seconds in reference parameters.
-    void getTime(int & hh,
-                 int & mm,
-                 int & ss) const
-    {
-        //this is where time is computed
-        hh = _secs / (60 * 60); //if it fits within minutes and seconds
-        mm = (_secs - hh*(60*60)) /60; //seconds - total seconds in the hours in hh, divided by total seconds in minute
-        ss = _secs % (24 * 60); //the remainder is seconds from hours and minutes
-
-    }
+ 
 
     // setTime
     // Set time to given # of hours, minutes, seconds past midnight.
