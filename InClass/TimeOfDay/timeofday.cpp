@@ -10,6 +10,8 @@
 // For class TimeOfDay
 #include <ostream>
 using std::ostream;
+#include <cassert>
+//for assert
 
 // getTime
  // Return hours, minutes, seconds in reference parameters.
@@ -38,6 +40,9 @@ void TimeOfDay::getTime(int& hh, int& mm,  int& ss) const
 ostream & operator<<(ostream & out,
                      const TimeOfDay & t)
 {
+    //to make sure that functions can't fix to much...
+    assert(0 <= t._secs && t._secs < 24 * 60 * 60);
+
     int hh, mm, ss;//first we need to pull the integers
     t.getTime(hh, mm, ss); //now to plug them into the function built in the .hpp file
     //in order to add in an easy blank to the front of, this what you do

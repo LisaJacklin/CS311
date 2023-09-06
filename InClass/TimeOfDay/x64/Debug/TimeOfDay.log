@@ -1,5 +1,42 @@
 ﻿  timeofday.cpp
-C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(60,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(79,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\x64\Debug\TimeOfDay.exe : fatal error LNK1120: 1 unresolved externals
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,18): error C2143: syntax error: missing ';' before '&'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,11): error C2433: 'ostream': 'friend' not permitted on data declarations
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,64): error C2238: unexpected token(s) preceding ';'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(77,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(96,27): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(38,25): error C2143: syntax error: missing ';' before ':'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(38,25): error C2059: syntax error: ':'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(12,12): error C2874: using-declaration causes a multiple declaration of 'ostream'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,11): message : see declaration of 'ostream'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(20,17): error C2511: 'void TimeOfDay::getTime(int &,int &,int &) const': overloaded member function not found in 'TimeOfDay'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(25,7): message : see declaration of 'TimeOfDay'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(24,5): error C2597: illegal reference to non-static member 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(24,5): message : see declaration of 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(24,5): error C3867: 'TimeOfDay::_secs': non-standard syntax; use '&' to create a pointer to member
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(24,5): error C2568: '<=': unable to resolve function overload
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(24,5): error C2568: '<': unable to resolve function overload
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(27,10): error C2597: illegal reference to non-static member 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(27,10): message : see declaration of 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(27,10): error C3867: 'TimeOfDay::_secs': non-standard syntax; use '&' to create a pointer to member
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(27,10): error C2568: '/': unable to resolve function overload
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(28,11): error C2597: illegal reference to non-static member 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(28,11): message : see declaration of 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(28,11): error C3867: 'TimeOfDay::_secs': non-standard syntax; use '&' to create a pointer to member
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(28,11): error C2568: '-': unable to resolve function overload
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(29,10): error C2597: illegal reference to non-static member 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(29,10): message : see declaration of 'TimeOfDay::_secs'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(29,10): error C3867: 'TimeOfDay::_secs': non-standard syntax; use '&' to create a pointer to member
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(29,10): error C2568: '%': unable to resolve function overload
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,9): error C2143: syntax error: missing ';' before '&'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,9): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,1): error C2086: 'int ostream': redefinition
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(27,11): message : see declaration of 'ostream'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,11): error C2473: 'operator <<': looks like a function definition, but there is no parameter list.
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,11): error C2365: 'operator <<': redefinition; previous definition was 'function'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.hpp(137,16): message : see declaration of 'operator <<'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(40,32): error C2065: 'out': undeclared identifier
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(41,22): error C2059: syntax error: 'const'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(42,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\lisal\Desktop\CS311\InClass\TimeOfDay\timeofday.cpp(42,1): error C2447: '{': missing function header (old-style formal list?)

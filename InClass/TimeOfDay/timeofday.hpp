@@ -24,6 +24,9 @@
 // Time of day: hours, minutes, seconds.
 class TimeOfDay {
 
+   friend ostream& operator<<(ostream& out, const TimeOfDay& t);
+
+
 // ***** TimeOfDay: Ctors, dctor, op= *****
 public:
 
