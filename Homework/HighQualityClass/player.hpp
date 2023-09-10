@@ -31,6 +31,25 @@ public:
 		//will need an assert because no nonnegative.
 	};
 
+	Player(std::string & _playerName, std::string& _playerUsername, int& _gamesPlayed)
+	{};
+
+	getData(); // stores data and calls the three pieces
+
+	setData(); //takes and returns nothing while calling three pieces.
+
+	inactive(); //should return a bool (1 if games = 0, false otherwise
+
+	toStirng(); //no parameters
+	//reutns a string rep of the stored info: name, ( username ): games in base10 int.
+
+	Player& operator==();
+	Player& operator!=();
+
+	//pre and post incremental operators
+	//stream insertion to output toString
+
+
 	//Data members -----------------
 private:
 	std::string _playerName;
