@@ -28,8 +28,8 @@ public:
 
 	//default constructor
 	Player() {
-		//set playername and playerusername to unknown,
-		//games set to zero
+		//player unknown, tag unknown, games zero
+		setData("Unknown", "Unknown", 0);
 	};
 
 	Player(const std::string& _playerName) {};
@@ -43,15 +43,27 @@ public:
 	Player(std::string & _playerName, std::string& _playerUsername, int& _gamesPlayed)
 	{};
 
-	getData(); // stores data and calls the three pieces
+	//-------------------------------------------------------
+	//Player - general public functions
 
-	setData(); //takes and returns nothing while calling three pieces.
+	void getData(std::string & _PlayerName,
+				 std::string & _playerUsername,
+				 int & _gamesPlayed); 
+	// stores data and calls the three pieces
+
+
+	void setData(std::string & _PlayerName,
+				 std::string & _playerUsername,
+				 int & _gamesPlayed);
+	//takes and returns nothing while calling three pieces.
 
 	inactive(); //should return a bool (1 if games = 0, false otherwise
 
 	toStirng(); //no parameters
 	//reutns a string rep of the stored info: name, ( username ): games in base10 int.
 
+	//-------------------------------------------------------
+	//Player - general public operators
 	Player& operator==();
 	Player& operator!=();
 
