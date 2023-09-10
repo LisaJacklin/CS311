@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\doctest.h" />
     <ClInclude Include="player.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\cs311-2023-03\player_test.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

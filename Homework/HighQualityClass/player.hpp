@@ -7,6 +7,12 @@
 //Homework 1
 
 class Player {
+	
+	Player();
+
+	Player& +operator();
+	Player& -operator();
+
 	Player(const std::string & playerName){}
 
 	Player(const std::string & playerUsername) {}
