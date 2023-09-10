@@ -1,11 +1,11 @@
 ﻿  player_test.cpp
 C:\Users\lisal\Desktop\cs311-2023-03\player_test.cpp(12,10): fatal  error C1083: Cannot open include file: 'player.hpp': No such file or directory
   player.cpp
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(37,2): error C2535: 'Player::Player(const std::string &)': member function already defined or declared
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(35,2): message : see declaration of 'Player::Player'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(67,10): error C2805: binary 'operator ==' has too few parameters
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(68,10): error C2805: binary 'operator !=' has too few parameters
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(32,3): error C2664: 'void Player::setData(std::string &,std::string &,int &)': cannot convert argument 1 from 'const char [8]' to 'std::string &'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(55,7): message : see declaration of 'Player::setData'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(32,3): message : while trying to match the argument list '(const char [8], const char [8], int)'
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(38,2): error C2535: 'Player::Player(const std::string &)': member function already defined or declared
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(36,2): message : see declaration of 'Player::Player'
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(68,10): error C2805: binary 'operator ==' has too few parameters
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(69,10): error C2805: binary 'operator !=' has too few parameters
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(33,3): error C2664: 'void Player::setData(std::string &,std::string &,int &)': cannot convert argument 1 from 'const char [8]' to 'std::string &'
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(56,7): message : see declaration of 'Player::setData'
+C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(33,3): message : while trying to match the argument list '(const char [8], const char [8], int)'
   Generating Code...

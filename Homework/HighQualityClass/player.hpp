@@ -17,7 +17,8 @@
 //-------------------------------------------------------
 //Class Player - Class Definition
 class Player {
-	//insertion operator definition
+
+	//friend definitions
 	friend std::ostream & operator<<(std::ostream& str, const Player& obj);
 
 	//-------------------------------------------------------
@@ -30,7 +31,7 @@ public:
 	Player() {
 		//player unknown, tag unknown, games zero
 		setData("Unknown", "Unknown", 0);
-	};
+	}
 
 	Player(const std::string& _playerName) {};
 
