@@ -9,10 +9,19 @@
 #ifndef FILE_PLAYER_HPP_INCLUDED
 #define FILE_PLAYER_HPP_INCLUDED
 
-#include <string>
-//for std::string
+#include <ostream>
+//for std::osteam
+#include <cassert>
+//for assert usage
 
+//-------------------------------------------------------
+//Class Player - Class Definition
 class Player {
+	//insertion operator definition
+	friend std::ostream & operator<<(std::ostream& str, const Player& obj);
+
+	//-------------------------------------------------------
+	//Player constructors, deconstructors, and operators
 public:
 	//note that copy constr, mov constr, copy assign, mov assign, and dstructor 
 	//are all automatically generated and need not be created.
@@ -49,7 +58,7 @@ public:
 	//pre and post incremental operators
 	//stream insertion to output toString
 
-
+	//-------------------------------------------------------
 	//Data members -----------------
 private:
 	std::string _playerName;
@@ -57,5 +66,11 @@ private:
 	int _gamesPlayed;
 
 }; //end of class Player
+
+//-------------------------------------------------------
+//Class Player - Declarations of associated Global operators
+//note that this function is defined in the source file.
+std::ostream& operator<<(std::ostream& str, const Player& obj);
+
 
 #endif
