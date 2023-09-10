@@ -57,9 +57,9 @@ public:
 				 int & _gamesPlayed);
 	//takes and returns nothing while calling three pieces.
 
-	inactive(); //should return a bool (1 if games = 0, false otherwise
+	void inactive(); //should return a bool (1 if games = 0, false otherwise
 
-	toStirng(); //no parameters
+	void toStirng(); //no parameters
 	//reutns a string rep of the stored info: name, ( username ): games in base10 int.
 
 	//-------------------------------------------------------
