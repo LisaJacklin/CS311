@@ -33,7 +33,7 @@ void Player::setData(std::string& _PlayerName,
 
 //-------------------------------------------------------
 //Definitions of Associated Global Operators
-std::ostream& operator<<(std::ostream& str, const Player& obj) {
+std::ostream& operator<<(std::ostream& str,  Player& obj) {
 	std::string _playerName;
 	std::string _playerUsername;
 	int _gamesPlayed;

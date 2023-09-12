@@ -6,8 +6,4 @@ C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(62,10): error 
 C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(33,3): error C2664: 'void Player::setData(std::string &,std::string &,int &)': cannot convert argument 1 from 'const char [8]' to 'std::string &'
 C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(49,7): message : see declaration of 'Player::setData'
 C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.hpp(33,3): message : while trying to match the argument list '(const char [8], const char [8], int)'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.cpp(41,5): error C2662: 'void Player::getData(std::string &,std::string &,int &)': cannot convert 'this' pointer from 'const Player' to 'Player &'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.cpp(41,2): message : Conversion loses qualifiers
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.cpp(19,14): message : see declaration of 'Player::getData'
-C:\Users\lisal\Desktop\CS311\Homework\HighQualityClass\player.cpp(41,5): message : while trying to match the argument list '(std::string, std::string, int)'
   Generating Code...
