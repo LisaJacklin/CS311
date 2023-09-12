@@ -29,7 +29,26 @@ void Player::setData(std::string& _PlayerName,
 
 
 }
+//-------------------------------------------------------
+//Operators definitions
+Player& Player::operator++() {
 
+	return *this;
+}
+Player& Player::operator++(int) {
+
+	return *this;
+}
+
+
+Player& Player::operator--() {
+
+	return *this;
+}
+Player& Player::operator--(int) {
+
+	return *this;
+}
 
 //-------------------------------------------------------
 //Definitions of Associated Global Operators
