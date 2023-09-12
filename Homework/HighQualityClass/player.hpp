@@ -58,8 +58,9 @@ public:
 
 	//-------------------------------------------------------
 	//Player - general public operators
-	Player& operator==();
-	Player& operator!=();
+	//increment and decrement
+	Player& operator++();
+	Player& operator--();
 
 	//pre and post incremental operators
 	//stream insertion to output toString
@@ -77,6 +78,9 @@ private:
 //Class Player - Declarations of associated Global operators
 //note that this function is defined in the source file.
 std::ostream& operator<<(std::ostream& str, const Player& obj);
+
+bool operator==(const Player& num, const Player& num2);
+bool operator!=(const Player& num, const Player& num2);
 
 
 #endif
