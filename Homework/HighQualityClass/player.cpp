@@ -29,15 +29,18 @@ bool Player::inactive() const {
 	return _gamesPlayed == 0;
 }
 
-void Player::getData(std::string& _PlayerName,
-					 std::string& _playerUsername,
-					 int& _gamesPlayed) 
-{}
+std::string Player::toString() {
+	std::string ret; //gathering pieces of the tag
+	ret += getName();
+	ret += " (";
+	ret += getUsername();
+	ret += "): ";
+	ret += getGames();
 
-void Player::setData(std::string& _PlayerName,
-					 std::string& _playerUsername,
-					 int& _gamesPlayed) 
-{}
+	return ret;
+}
+
+
 //-------------------------------------------------------
 //Operators definitions
 Player& Player::operator++() {
@@ -45,8 +48,9 @@ Player& Player::operator++() {
 	return *this;
 }
 Player& Player::operator++(int) {
-	
-	return *this;
+	Player ret(*this);
+	++(*this);
+	return ret;
 }
 
 
@@ -55,8 +59,9 @@ Player& Player::operator--() {
 	return *this;
 }
 Player& Player::operator--(int) {
-
-	return *this;
+	Player ret(*this);
+	--(*this);
+	return ret;
 }
 
 //setting up getting values for each variable
