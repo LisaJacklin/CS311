@@ -8,12 +8,28 @@
 
 #include "player.hpp"
 //includes the player class created
+#include <cassert>
+//for assert
+#include <ostream>
+//for std::ostream;
 
+
+//-------------------------------------------------------
+//Definitions of class functions
+void Player::getData() {
+
+
+}
+
+void Player::setData() {
+
+
+}
+
+
+//-------------------------------------------------------
+//Definitions of Associated Global Operators
 std::ostream& operator<<(std::ostream& str, const Player& obj) {
 	//need to define here
 };
 
-int main() {
-
-
-}
