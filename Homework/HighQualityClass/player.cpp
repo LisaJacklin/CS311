@@ -24,20 +24,20 @@ Player::Player(std::string& _playerName, std::string& _playerUsername, int& _gam
 	:_playerName(_playerName), _playerUsername(_playerUsername), _gamesPlayed(_gamesPlayed)
 {}
 
+//bool for if game is being played or not
+bool Player::inactive() const {
+	return _gamesPlayed == 0;
+}
 
 void Player::getData(std::string& _PlayerName,
 					 std::string& _playerUsername,
-					 int& _gamesPlayed) {
-
-
-}
+					 int& _gamesPlayed) 
+{}
 
 void Player::setData(std::string& _PlayerName,
 					 std::string& _playerUsername,
-					 int& _gamesPlayed) {
-
-
-}
+					 int& _gamesPlayed) 
+{}
 //-------------------------------------------------------
 //Operators definitions
 Player& Player::operator++() {
