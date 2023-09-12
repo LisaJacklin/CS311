@@ -41,17 +41,17 @@ void Player::setData(std::string& _PlayerName,
 //-------------------------------------------------------
 //Operators definitions
 Player& Player::operator++() {
-
+	_gamesPlayed++;
 	return *this;
 }
 Player& Player::operator++(int) {
-
+	
 	return *this;
 }
 
 
 Player& Player::operator--() {
-
+	if (_gamesPlayed > 0) _gamesPlayed--;
 	return *this;
 }
 Player& Player::operator--(int) {
