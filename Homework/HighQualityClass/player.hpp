@@ -54,7 +54,10 @@ public:
 	Player& operator--();
 	Player& operator--(int);
 
-	//pre and post incremental operators
+
+	void setName(std::string);
+	void setUsername(std::string);
+	void setGames(int a);
 
 	//-------------------------------------------------------
 	//Data members/objects -----------------

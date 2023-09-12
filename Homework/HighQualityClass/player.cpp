@@ -16,6 +16,15 @@
 
 //-------------------------------------------------------
 //Definitions of class functions
+Player::Player()
+	:_playerName("Unknown"), _playerUsername("Unknown"), _gamesPlayed(0)
+{}
+
+Player::Player(std::string& _playerName, std::string& _playerUsername, int& _gamesPlayed)
+	:_playerName(_playerName), _playerUsername(_playerUsername), _gamesPlayed(_gamesPlayed)
+{}
+
+
 void Player::getData(std::string& _PlayerName,
 					 std::string& _playerUsername,
 					 int& _gamesPlayed) {
