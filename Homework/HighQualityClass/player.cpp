@@ -94,9 +94,9 @@ std::ostream& operator<<(std::ostream& str,  Player& obj) {
 };
 
 bool operator==(const Player& num, const Player& num2) {
-
+	return num.getName() == num2.getName() && num.getUsername() == num2.getUsername() && num.getGames() == num2.getGames();
 }
 
 bool operator!=(const Player& num, const Player& num2) {
-
+	return !(num == num2);
 }
