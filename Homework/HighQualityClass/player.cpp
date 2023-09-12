@@ -88,12 +88,15 @@ void Player::setGames(int a) {
 //-------------------------------------------------------
 //Definitions of Associated Global Operators
 std::ostream& operator<<(std::ostream& str,  Player& obj) {
-	std::string _playerName;
-	std::string _playerUsername;
-	int _gamesPlayed;
-
-	obj.getData(_playerName, _playerUsername, _gamesPlayed);
-
+	
+	str << obj.toString();
 	return str;
 };
 
+bool operator==(const Player& num, const Player& num2) {
+
+}
+
+bool operator!=(const Player& num, const Player& num2) {
+
+}
