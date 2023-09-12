@@ -33,13 +33,6 @@ public:
 		setData("Unknown", "Unknown", 0);
 	}
 
-	Player(const std::string& _playerName) {};
-
-	Player(const std::string& _playerUsername) {};
-
-	Player(int& _gamesPlayed) {
-		//will need an assert because no nonnegative.
-	};
 
 	Player(std::string & _playerName, std::string& _playerUsername, int& _gamesPlayed)
 	{};
@@ -60,7 +53,7 @@ public:
 
 	void inactive(); //should return a bool (1 if games = 0, false otherwise
 
-	void toStirng(); //no parameters
+	void toString(); //no parameters
 	//reutns a string rep of the stored info: name, ( username ): games in base10 int.
 
 	//-------------------------------------------------------
@@ -72,7 +65,7 @@ public:
 	//stream insertion to output toString
 
 	//-------------------------------------------------------
-	//Data members -----------------
+	//Data members/objects -----------------
 private:
 	std::string _playerName;
 	std::string _playerUsername;
