@@ -16,12 +16,16 @@
 
 //-------------------------------------------------------
 //Definitions of class functions
-void Player::getData() {
+void Player::getData(std::string& _PlayerName,
+					 std::string& _playerUsername,
+					 int& _gamesPlayed) {
 
 
 }
 
-void Player::setData() {
+void Player::setData(std::string& _PlayerName,
+					 std::string& _playerUsername,
+					 int& _gamesPlayed) {
 
 
 }
@@ -30,6 +34,12 @@ void Player::setData() {
 //-------------------------------------------------------
 //Definitions of Associated Global Operators
 std::ostream& operator<<(std::ostream& str, const Player& obj) {
-	//need to define here
+	std::string _playerName;
+	std::string _playerUsername;
+	int _gamesPlayed;
+
+	obj.getData(_playerName, _playerUsername, _gamesPlayed);
+
+	return str;
 };
 
