@@ -32,14 +32,13 @@ public:
 	//-------------------------------------------------------
 	//Player - general public functions
 
-	void getData(std::string & _PlayerName,
-				 std::string & _playerUsername,
-				 int & _gamesPlayed); 
+	std::string getName() const;
+	std::string getUsername() const;
+	int getGames() const;
 
-
-	void setData(std::string & _PlayerName,
-				 std::string & _playerUsername,
-				 int & _gamesPlayed);
+	void setName(std::string name);
+	void setUsername(std::string user);
+	void setGames(int a);
 
 	bool inactive() const; //should return a bool (1 if games = 0, false otherwise
 
@@ -53,11 +52,6 @@ public:
 
 	Player& operator--();
 	Player& operator--(int);
-
-
-	void setName(std::string);
-	void setUsername(std::string);
-	void setGames(int a);
 
 	//-------------------------------------------------------
 	//Data members/objects -----------------

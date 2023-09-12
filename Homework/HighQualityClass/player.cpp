@@ -59,6 +59,32 @@ Player& Player::operator--(int) {
 	return *this;
 }
 
+//setting up getting values for each variable
+//setting items
+std::string Player::getName() const {
+	return _playerName;
+}
+
+std::string Player::getUsername() const {
+	return _playerUsername;
+}
+int Player::getGames() const {
+	return _gamesPlayed;
+}
+
+void Player::setName(std::string name) {
+	_playerName = name;
+}
+
+void Player::setUsername(std::string user) {
+	_playerUsername = user;
+}
+
+void Player::setGames(int a) {
+	assert(a > 0); //games played must be higher than zero...
+	_gamesPlayed = a;
+}
+
 //-------------------------------------------------------
 //Definitions of Associated Global Operators
 std::ostream& operator<<(std::ostream& str,  Player& obj) {
