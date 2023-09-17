@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\doctest.h" />
     <ClInclude Include="fsarray.hpp" />
   </ItemGroup>
   <ItemGroup>
