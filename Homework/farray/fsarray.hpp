@@ -5,7 +5,7 @@
 #ifndef FILE_FSARRAY_HPP_INCLUDED
 #define FILE_FSARRAY_HPP_INCLUDED
 
-template<typename data_T>; //this is what will change the class below
+template<typename data_T> //this is what will change the class below
 class FSArray {
 public:
 	//----------------------------------------------------
@@ -42,9 +42,23 @@ public:
 		return _size;
 		}; 
 	
-	data_T* begin() {}; //return address of item 0 (think iterator)
+	data_T* begin() {
+		return _data;
+		}; //return address of item 0 (think iterator)
 
-	data_T* end() {}; // returns address of item one past end of array (think iterator)
+	//need to remember to add in begin() const!
+	const data_T* begin() const {
+		return _data;
+	};
+	// returns address of item one past end of array 
+	data_T* end() {
+		return _data + _size;
+	}; 
+
+	//end const required!
+	const data_T* end() const {
+		return _data + _size;
+	};
 
 
 	//deconstructor
@@ -60,7 +74,7 @@ public:
 
 	FSArray operator<();
 
-	FSArray operator<=(const FSarray& other) const {
+	FSArray operator<=(const FSArray& other) const {
 		return (*this < other) || (*this == other);
 	}
 
