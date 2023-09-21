@@ -15,24 +15,21 @@ public:
 
 	//----------------------------------------------------
 	//Class Constructors
-	FSArray() {}; //this needs object of size 8.
-
-	
-	//copy operators create entirely new copy of data, 
-	//modifying the copy doesn't change the original!
-
-	//view invisible functions II for all member functions...
+	FSArray():_size(8), _data(new value_type[_size]) {} 
+	//this needs object of size 8.
 
 
 	//----------------------------------------------------
 	//parameter constructors
 
 	//1 parameter non negative int for values in array
-	FSArray(int & arraySize) {};
+	FSArray(int & arraySize) 
+	:_size(size), _data(new value_type[_size]) {}
 
 	//2 parameter, nonnegav int items in array, item of value type.
 	//all items in array set to this value
-	FSArray(int& arraySize) {}; //need to include data type!
+	FSArray(int& arraySize, const value_type& value) 
+	:size(_size), _data(new value_type[_size]) {} //need to include data type!
 
 
 	//----------------------------------------------------
