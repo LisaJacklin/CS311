@@ -96,21 +96,60 @@ public:
 
 	//----------------------------------------------------
 	//Class operators
-	FSArray operator==();
-	
-	FSArray operator!=();
 
-	FSArray operator<();
-
-	FSArray operator<=(const FSArray& other) const {
-		return (*this < other) || (*this == other);
+	// Bracket operators
+	value_type& operator[](size_type index) {
+		if (index >= _size) {
+			throw std::out_of_range("Index out of range");
+		}
+		return data_[index];
 	}
 
-	FSArray operator>(const FSArray& other) const {
+	const value_type& operator[](size_type index) const {
+		if (index >= _size) {
+			throw std::out_of_range("Index out of range");
+		}
+		return data_[index];
+	}
+
+	// comparison operators for FSArray
+	bool operator==(const FSArray& other) const {
+		if (_size != other._size) {
+			return false;
+		}
+		for (size_type i = 0; i < _size; ++i) {
+			if (data_[i] != other._data[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool operator!=(const FSArray& other) const {
+		return !(*this == other);
+	}
+
+	bool operator<(const FSArray& other) const {
+		for (size_type i = 0; i < _size; ++i) {
+			if (_data[i] < other._data[i]) {
+				return true;
+			}
+			if (_data[i] > other._data[i]) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	bool operator<=(const FSArray& other) const {
+		return (*this == other) || (*this < other);
+	}
+
+	bool operator>(const FSArray& other) const {
 		return !(*this <= other);
 	}
 
-	FSArray operator>=(const FSArray& other) const {
+	bool operator>=(const FSArray& other) const {
 		return !(*this < other);
 	}
 	//----------------------------------------------------
