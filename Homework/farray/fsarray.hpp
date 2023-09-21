@@ -18,7 +18,6 @@ public:
 	FSArray():_size(8), _data(new value_type[_size]) {} 
 	//this needs object of size 8.
 
-
 	//----------------------------------------------------
 	//parameter constructors
 
@@ -31,6 +30,44 @@ public:
 	FSArray(int& arraySize, const value_type& value) 
 	:size(_size), _data(new value_type[_size]) {} //need to include data type!
 
+	//deconstructor
+	~FSArray() {
+		delete[] _data;
+	}; //frees any dynamically allocated memory
+
+	//now to build the other constuctors...
+	//copy constructor
+	FSArray(const FSArray& other) :_size(other._size), _data(value_type[_size]) {
+		copyFrom(other);
+	}
+	//move constructor
+	FSArray(FSArray&& other) noexcept :_size(other._size), _data(other._data) {
+		other._size = 0;
+		other._data = nullptr;
+	}
+
+	//copy assignment
+	FSArray& operator=(const FSArray& other) {
+		if (this != &other) {
+			delete[] _data;
+			_size_ = other._size;
+			_data = new value_type[_size];
+			copyFrom(other);
+		}
+		return *this;
+	}
+
+	// Move assignment
+	FSArray& operator=(FSArray&& other) noexcept {
+		if (this != &other) {
+			delete[] _data;
+			_size = other._size;
+			_data = other._data;
+			other._size = 0;
+			other._data = nullptr;
+		}
+		return *this;
+	}
 
 	//----------------------------------------------------
 	// Class Member Functions
@@ -56,12 +93,6 @@ public:
 	const data_T* end() const {
 		return _data + _size;
 	};
-
-
-	//deconstructor
-	~FSArray() {
-		delete[] _data;
-	}; //frees any dynamically allocated memory
 
 	//----------------------------------------------------
 	//Class operators
