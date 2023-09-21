@@ -1,3 +1,2 @@
 ﻿  fsarray_test.cpp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\lisal\Desktop\CS311\Homework\farray\x64\Debug\farray.exe : fatal error LNK1120: 1 unresolved externals
+C:\Users\lisal\Desktop\cs311-2023-03\fsarray_test.cpp(12,10): fatal  error C1083: Cannot open include file: 'fsarray.hpp': No such file or directory
