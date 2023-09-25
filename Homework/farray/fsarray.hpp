@@ -15,25 +15,59 @@ public:
 
 	//----------------------------------------------------
 	//Class Constructors
-	FSArray() {}; //this needs object of size 8.
-
-	
-	//copy operators create entirely new copy of data, 
-	//modifying the copy doesn't change the original!
-
-	//view invisible functions II for all member functions...
-
+	FSArray():_size(8), _data(new value_type[_size]) {} 
+	//this needs object of size 8.
 
 	//----------------------------------------------------
 	//parameter constructors
 
 	//1 parameter non negative int for values in array
-	FSArray(int & arraySize) {};
+	FSArray(int & arraySize) 
+	:_size(size), _data(new value_type[_size]) {}
 
 	//2 parameter, nonnegav int items in array, item of value type.
 	//all items in array set to this value
-	FSArray(int& arraySize) {}; //need to include data type!
+	FSArray(int& arraySize, const value_type& value) 
+	:size(_size), _data(new value_type[_size]) {} //need to include data type!
 
+	//deconstructor
+	~FSArray() {
+		delete[] _data;
+	}; //frees any dynamically allocated memory
+
+	//now to build the other constuctors...
+	//copy constructor
+	FSArray(const FSArray& other) :_size(other._size), _data(value_type[_size]) {
+		copyFrom(other);
+	}
+	//move constructor
+	FSArray(FSArray&& other) noexcept :_size(other._size), _data(other._data) {
+		other._size = 0;
+		other._data = nullptr;
+	}
+
+	//copy assignment
+	FSArray& operator=(const FSArray& other) {
+		if (this != &other) {
+			delete[] _data;
+			_size_ = other._size;
+			_data = new value_type[_size];
+			copyFrom(other);
+		}
+		return *this;
+	}
+
+	// Move assignment
+	FSArray& operator=(FSArray&& other) noexcept {
+		if (this != &other) {
+			delete[] _data;
+			_size = other._size;
+			_data = other._data;
+			other._size = 0;
+			other._data = nullptr;
+		}
+		return *this;
+	}
 
 	//----------------------------------------------------
 	// Class Member Functions
@@ -60,29 +94,62 @@ public:
 		return _data + _size;
 	};
 
-
-	//deconstructor
-	~FSArray() {
-		delete[] _data;
-	}; //frees any dynamically allocated memory
-
 	//----------------------------------------------------
 	//Class operators
-	FSArray operator==();
-	
-	FSArray operator!=();
 
-	FSArray operator<();
-
-	FSArray operator<=(const FSArray& other) const {
-		return (*this < other) || (*this == other);
+	// Bracket operators
+	value_type& operator[](size_type index) {
+		if (index >= _size) {
+			throw std::out_of_range("Index out of range");
+		}
+		return data_[index];
 	}
 
-	FSArray operator>(const FSArray& other) const {
+	const value_type& operator[](size_type index) const {
+		if (index >= _size) {
+			throw std::out_of_range("Index out of range");
+		}
+		return data_[index];
+	}
+
+	// comparison operators for FSArray
+	bool operator==(const FSArray& other) const {
+		if (_size != other._size) {
+			return false;
+		}
+		for (size_type i = 0; i < _size; ++i) {
+			if (data_[i] != other._data[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool operator!=(const FSArray& other) const {
+		return !(*this == other);
+	}
+
+	bool operator<(const FSArray& other) const {
+		for (size_type i = 0; i < _size; ++i) {
+			if (_data[i] < other._data[i]) {
+				return true;
+			}
+			if (_data[i] > other._data[i]) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	bool operator<=(const FSArray& other) const {
+		return (*this == other) || (*this < other);
+	}
+
+	bool operator>(const FSArray& other) const {
 		return !(*this <= other);
 	}
 
-	FSArray operator>=(const FSArray& other) const {
+	bool operator>=(const FSArray& other) const {
 		return !(*this < other);
 	}
 	//----------------------------------------------------
