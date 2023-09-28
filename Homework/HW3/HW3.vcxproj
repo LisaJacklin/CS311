@@ -127,12 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\da3.hpp" />
+    <ClInclude Include="da3.hpp" />
     <ClInclude Include="doctest.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\da3.cpp" />
-    <ClCompile Include="..\..\da3_test.cpp" />
+    <ClCompile Include="da3.cpp" />
+    <ClCompile Include="da3_test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

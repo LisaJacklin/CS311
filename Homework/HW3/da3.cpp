@@ -1,6 +1,6 @@
-// da3.cpp  SKELETON
-// Glenn G. Chappell
-// 2023-09-21
+// da3.cpp  writeup from SKELETON
+// Lisa Jacklin
+// 2023-09-24
 //
 // For CS 311 Fall 2023
 // Source for Assignment 3 functions
