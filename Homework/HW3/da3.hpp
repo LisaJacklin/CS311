@@ -17,8 +17,27 @@ template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> * head,
                  std::size_t index)
 {
+    //Remember, we need to throw exceptions
+    //so the first one to throw, is if the list is empty
+    if (!head) {
+        throw std::_Xout_of_range("List is empty");
+    }
+
+    const LLNode <ValueType>* current = head; //to determine how many to iterate
+    std::size_t counter = 0; //counter starts at zero
+
+    while (current) 
+    {
+        if (counter == index) {
+            return current->_data;
+        }
+
+        current = current->_next;
+        ++counter;
+    }
     return ValueType();  // DUMMY
-    // TODO: WRITE THIS!!!
+    throw std::_Xout_of_range("index out of range");
+
 }
 
 

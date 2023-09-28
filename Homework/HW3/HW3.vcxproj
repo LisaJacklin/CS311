@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="da3.hpp" />
     <ClInclude Include="doctest.h" />
+    <ClInclude Include="llnode.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="da3.cpp" />
