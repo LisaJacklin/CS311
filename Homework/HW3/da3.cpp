@@ -13,8 +13,15 @@ using std::function;
 
 void didItThrow(const function<void()> & ff,
                 bool & threw)
-{
-    // TODO: WRITE THIS!!!
+{ // need to try and catch the exceptions
+    try {
+        ff(); //takes no par!
+        threw = false;
+    }
+    catch (const std::exception&) {
+        threw = true;
+    }
+
 }
 
 
