@@ -50,8 +50,21 @@ template <typename FDIter>
 bool checkSorted(FDIter first,
                  FDIter last)
 {
-    return false;  // DUMMY
-    // TODO: WRITE THIS!!!
+    if (first == last) {
+        return true; //empty range might as well be sorted
+  }
+
+    FDIter next = first;
+    ++next;
+
+    while (next != last) {
+        if (*next < *first) {
+            return false;
+        }
+        ++first;
+        ++next;
+    }
+    return true;
 }
 
 
