@@ -11,6 +11,7 @@
 #include "llnode.hpp"  // For LLNode
 #include <cstddef>     // For std::size_t
 #include <functional>  // For std::function
+#include <stdexcept>   // for std::out_of_range
 
 
 template <typename ValueType>
@@ -20,7 +21,7 @@ ValueType lookup(const LLNode<ValueType> * head,
     //Remember, we need to throw exceptions
     //so the first one to throw, is if the list is empty
     if (!head) {
-        throw std::_Xout_of_range("List is empty");
+        throw std::out_of_range("List is empty");
     }
 
     const LLNode <ValueType>* current = head; //to determine how many to iterate
@@ -36,7 +37,7 @@ ValueType lookup(const LLNode<ValueType> * head,
         ++counter;
     }
     return ValueType();  // DUMMY
-    throw std::_Xout_of_range("index out of range");
+    throw std::out_of_range("index out of range");
 
 }
 

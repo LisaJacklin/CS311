@@ -12,11 +12,5 @@ C:\Users\lisal\Desktop\CS311\Homework\HW3\da3_test.cpp(284,14): warning C5051: a
 C:\Users\lisal\Desktop\CS311\Homework\HW3\da3_test.cpp(341,14): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
 C:\Users\lisal\Desktop\CS311\Homework\HW3\da3_test.cpp(448,14): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
 C:\Users\lisal\Desktop\CS311\Homework\HW3\da3_test.cpp(477,14): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-C:\Users\lisal\Desktop\CS311\Homework\HW3\da3.hpp(23,9): error C2186: 'throw': illegal operand of type 'void'
-C:\Users\lisal\Desktop\CS311\Homework\HW3\da3_test.cpp(179,40): message : see reference to function template instantiation 'ValueType lookup<int>(const LLNode<int> *,size_t)' being compiled
-          with
-          [
-              ValueType=int
-          ]
-C:\Users\lisal\Desktop\CS311\Homework\HW3\da3.hpp(39,5): error C2186: 'throw': illegal operand of type 'void'
   Generating Code...
+  HW3.vcxproj -> C:\Users\lisal\Desktop\CS311\Homework\HW3\x64\Debug\HW3.exe
