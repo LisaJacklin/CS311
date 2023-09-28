@@ -28,7 +28,13 @@ void didItThrow(const function<void()> & ff,
 int gcd(int a,
         int b)
 {
-    return 42;  // DUMMY
-    // TODO: WRITE THIS!!!
+    //note that this takes a / b to give the output
+    if (b == 0) {
+        return a;
+    }
+    else {
+        return gcd(b, a % b);
+    }
+   
 }
 

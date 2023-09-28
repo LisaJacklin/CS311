@@ -57,7 +57,7 @@ bool checkSorted(FDIter first,
     FDIter next = first;
     ++next;
 
-    while (next != last) {
+    while (next != last) { // iterating so long as we aren't at the last item
         if (*next < *first) {
             return false;
         }
