@@ -5,14 +5,11 @@
 #ifndef HSSCOUNT_HPP_INCLUDED
 #define HSSCOUNT_HPP_INCLUDED
 
-//when considering a board of n size, we need to consider
+//when considering a board of n size. Note that we are using this to call 
+//hssCoutn_resurse
 int hssCount(int dim_x, int dim_y,
     int hole_x, int hole_y,
     int start_x, int start_y,
     int finish_x, int finish_y);
 
-//inititing a recursive function version...
-int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
-    int finish_x, int finish_y, int current_x, int current_y,
-    int visited);
 #endif // HSSCOUNT_HPP_INCLUDED
