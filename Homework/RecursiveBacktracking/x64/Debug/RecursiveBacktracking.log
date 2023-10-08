@@ -1,8 +1,2 @@
 ﻿  hsscount.cpp
-  hsscount_test.cpp
-C:\Users\lisal\Desktop\CS311\Homework\RecursiveBacktracking\hsscount_test.cpp(82,24): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-C:\Users\lisal\Desktop\CS311\Homework\RecursiveBacktracking\hsscount_test.cpp(99,2): message : see reference to class template instantiation 'TypeCheck<T>' being compiled
-C:\Users\lisal\Desktop\CS311\Homework\RecursiveBacktracking\hsscount_test.cpp(94,24): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-C:\Users\lisal\Desktop\CS311\Homework\RecursiveBacktracking\hsscount_test.cpp(110,6): warning C5051: attribute 'maybe_unused' requires at least '/std:c++17'; ignored
-  Generating Code...
   RecursiveBacktracking.vcxproj -> C:\Users\lisal\Desktop\CS311\Homework\RecursiveBacktracking\x64\Debug\RecursiveBacktracking.exe

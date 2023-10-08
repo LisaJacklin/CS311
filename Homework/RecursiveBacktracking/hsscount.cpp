@@ -11,7 +11,8 @@
 int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
     int finish_x, int finish_y, int current_x, int current_y,
     int visited) {
-    // Base case: reached the finish square
+
+    // Base case: when reaching the finish square
     if (current_x == finish_x && current_y == finish_y) {
         // If all squares are visited, this is a valid scuttle
         if (visited == dim_x * dim_y) {
@@ -23,7 +24,6 @@ int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
     }
 
     int count = 0;
-
     // Define possible moves
     int dx[] = { 1, -1, 0, 0, 1, -1, 1, -1 };
     int dy[] = { 0, 0, 1, -1, 1, -1, -1, 1 };
