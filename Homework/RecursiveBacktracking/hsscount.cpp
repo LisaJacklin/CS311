@@ -21,6 +21,10 @@ int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
         else {
             return 0;
         }
+
+        //horizonal and vertical on the board need to be tested.
+
+    
     }
 
     int count = 0;
@@ -50,8 +54,18 @@ int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
 
 int hssCount(int dim_x, int dim_y, int hole_x, int hole_y,
     int start_x, int start_y, int finish_x, int finish_y) {
+
+
     // Mark the start square as visited
     int visited = 1 << (start_x * dim_y + start_y);
+
+    //add a check that for board solving....
+    int left = dim_y * dim_x - 2; //note that at a single square left means we cannot solve
+    //especially if we haven't hit that finish square yet.
+    if (left % 2 != 0) {
+        return 0; //here is the check 
+    }
+
     return hssCount_recurse(dim_x, dim_y, hole_x, hole_y,
         finish_x, finish_y, start_x, start_y, visited);
 }
