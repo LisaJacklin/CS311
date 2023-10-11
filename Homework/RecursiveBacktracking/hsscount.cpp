@@ -16,23 +16,21 @@ int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
     if (current_x == finish_x && current_y == finish_y) {
         // If all squares are visited, this is a valid scuttle
         if (visited == dim_x * dim_y) {
-            return 1;
+            return 1; //by now a solution must be found...
         }
         else {
             return 0;
         }
-
-        //horizonal and vertical on the board need to be tested.
-
-    
+   
     }
-
+    //recursive case
     int count = 0;
     // Define possible moves
     int dx[] = { 1, -1, 0, 0, 1, -1, 1, -1 };
     int dy[] = { 0, 0, 1, -1, 1, -1, -1, 1 };
 
-    for (int i = 0; i < 8; ++i) {
+    //now to move around the board
+    for (int i = 0; i < dim_x * dim_y; ++i) {
         int next_x = current_x + dx[i];
         int next_y = current_y + dy[i];
 
@@ -40,7 +38,9 @@ int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
         if (next_x >= 0 && next_x < dim_x &&
             next_y >= 0 && next_y < dim_y &&
             !(visited & (1 << (next_x * dim_y + next_y))) &&
-            !(next_x == hole_x && next_y == hole_y)) {
+            !(next_x == hole_x && next_y == hole_y))
+        {
+            
             int new_visited = visited | (1 << (next_x * dim_y + next_y));
             count += hssCount_recurse(dim_x, dim_y, hole_x, hole_y,
                 finish_x, finish_y, next_x, next_y, new_visited);
