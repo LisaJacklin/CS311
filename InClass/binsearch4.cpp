@@ -1,11 +1,11 @@
-// binsearch2.cpp
+// binsearch4.cpp
 // Glenn G. Chappell
-// 2023-09-20
+// 2023-09-25
 //
 // For CS 311 Fall 2023
 // Binary Search
-// Implementation #2: recursive (improved)
-// Based on binsearch1.cpp
+// Implementation #4: iterative (tail recursion eliminated)
+// Based on binsearch3.cpp
 
 #include <iostream>
 using std::cout;
@@ -42,7 +42,6 @@ using bignum = int_fast64_t;
 // binSearch
 // Does Binary Search on a range specified with iterators. Returns true
 // if findme was found (using equivalence) in range, false otherwise.
-// Recursive.
 // Requirements on types:
 //     FDIter is a forward iterator type.
 //     ValueType is the value type of FDIter.
@@ -59,30 +58,36 @@ bool binSearch(FDIter first,      // [first, last) is range to search
                const ValueType & findme)
                                   // value to find
 {
-    auto size = distance(first, last);  // Size of range
-
-    // BASE CASE
-
-    if (size <= 1)
+    while (true)  // For tail-recursion elimination
     {
-        if (size == 0)
-            return false;
-        return !(*first < findme) && !(findme < *first);
-            // Check equivalence
-    }
+        auto size = distance(first, last);  // Size of range
 
-    // RECURSIVE CASE
+        // BASE CASE of former recursive function
 
-    // Get iterator to pivot: item in middle position of range
-    auto pivotiter = next(first, size/2);
+        if (size <= 1)
+        {
+            if (size == 0)
+                return false;
+            return !(*first < findme) && !(findme < *first);
+                // Check equivalence
+        }
 
-    if (findme < *pivotiter)
-    {   // Recursively search first half of range
-        return binSearch(first, pivotiter, findme);
-    }
-    else
-    {   // Recursively search second half of range
-        return binSearch(pivotiter, last, findme);
+        // RECURSIVE CASE of former recursive function
+
+        // Get iterator to pivot: item in middle position of range
+        auto pivotiter = next(first, size/2);
+
+        if (findme < *pivotiter)
+        {   // Recursively search first half of range
+            last = pivotiter;
+        }
+        else
+        {   // Recursively search second half of range
+            first = pivotiter;
+        }
+
+        // Single tail-recursive call is gone, replaced by loop
+        //return binSearch(first, last, findme);
     }
 }
 

@@ -1,11 +1,11 @@
-// binsearch2.cpp
+// binsearch3.cpp
 // Glenn G. Chappell
-// 2023-09-20
+// 2023-09-25
 //
 // For CS 311 Fall 2023
 // Binary Search
-// Implementation #2: recursive (improved)
-// Based on binsearch1.cpp
+// Implementation #3: single tail-recursive call
+// Based on binsearch2.cpp
 
 #include <iostream>
 using std::cout;
@@ -78,12 +78,17 @@ bool binSearch(FDIter first,      // [first, last) is range to search
 
     if (findme < *pivotiter)
     {   // Recursively search first half of range
-        return binSearch(first, pivotiter, findme);
+        //return binSearch(first, pivotiter, findme);
+        last = pivotiter;
     }
     else
     {   // Recursively search second half of range
-        return binSearch(pivotiter, last, findme);
+        //return binSearch(pivotiter, last, findme);
+        first = pivotiter;
     }
+
+    // Single tail-recursive call
+    return binSearch(first, last, findme);
 }
 
 
