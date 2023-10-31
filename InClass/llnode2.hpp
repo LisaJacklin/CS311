@@ -13,7 +13,13 @@
 
 #include <cstddef>
 // For std::size_t
+#include <memory>
+//for std::unique_ptr<>
+//for std::make_unique
 
+
+// forward declarations... this is so pop_front will work as we are using it higher
+//this is where we go through and add in the templates of the two we need, pop_forward and one other to allow the program to compile.
 
 // *********************************************************************
 // struct LLNode2 - Struct definition
@@ -30,7 +36,7 @@
 template <typename ValType>
 struct LLNode2 {
     ValType    _data;  // Data for this node
-    LLNode2 *  _next;  // Ptr to next node, or nullptr if none
+    std::unique_ptr<LLNode2>   _next;  // Ptr to next node, or nullptr if none
 
     // The following simplify creation & destruction
 
@@ -42,7 +48,7 @@ struct LLNode2 {
     //      an LLNode2 allocated with new, with ownership transferred to
     //      *this.
     explicit LLNode2(const ValType & data,
-                     LLNode2 * next = nullptr)
+                     std::unique_ptr<LLNode2> next = nullptr)// note that we don't want to convert often,but to a nullptr is fine.
         :_data(data),
          _next(next)
     {}
@@ -50,7 +56,14 @@ struct LLNode2 {
     // dctor
     // Does delete on _next.
     ~LLNode2()
-    { delete _next; }
+    {
+        while (? ? ? )
+        {
+            //through using this, we can go through and destroy as we walk through the list.
+            //this means that 
+            pop_front(_next); 
+        }
+    }
 
     // No default ctor, no copy/move operations.
     LLNode2() = delete;
@@ -77,17 +90,45 @@ struct LLNode2 {
 // NOTE: The above are the requirements for LLNode2<ValType>; no member
 // functions of ValType are actually used here.
 template <typename ValType>
-std::size_t size(const LLNode2<ValType> * head)
+std::size_t size(const std::unique_ptr<LLNode2<ValType>> * head)
 {
-    auto p = head;            // Iterates through list
+    //here is where we have a problem...cannot  do this with a unique pointer because its copying here.
+    //note that we can add .get() since all we are trying to do is increment through a linked list
+    auto p = head.get();            // Iterates through list
     std::size_t counter = 0;  // Number of nodes so far
     while (p != nullptr)
     {
-        p = p->_next;
+        //note that .get() changes the type so we can get the values of a different pointer type since p here is a unique pointer. Thus no conversions
+        p = p->_next.get();
         ++counter;
     }
     return counter;
 }
+
+//built in class
+template <typename ValType>
+void push_front(std::unique_ptr<LLNode2<ValType>>& head,
+    const ValType& item)
+{
+    //this will create a node!
+    head = std::make_unique<LLNode2<ValType>> (item, head)
+}
+
+//built in class
+//Pre:
+//      head is not null pointer!
+template <typename ValType>
+void pop_front(std::unique_ptr<LLNode2<ValType>>&head)
+{
+    //things that remove things from lists need to have preconditions
+    auto savenext = std::move(head -> _next);
+
+}
+
+
+
+//notes from class:
+// foo x --> std::unique_prt<Foo>
 
 
 #endif  //#ifndef FILE_LLNODE2_HPP_INCLUDED
