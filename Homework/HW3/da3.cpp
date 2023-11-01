@@ -10,7 +10,7 @@
 #include <functional>
 using std::function;
 
-
+//Exercise B
 void didItThrow(const function<void()> & ff,
                 bool & threw)
 { // need to try and catch the exceptions
@@ -24,11 +24,12 @@ void didItThrow(const function<void()> & ff,
 
 }
 
-
+//Exercise D
 int gcd(int a,
         int b)
 {
     //note that this takes a / b to give the output
+
     if (b == 0) {
         return a;
     }
