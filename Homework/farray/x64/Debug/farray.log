@@ -1,2 +1,2 @@
 ﻿  fsarray_test.cpp
-c1xx : fatal  error C1083: Cannot open source file: '..\..\..\cs311-2023-03\fsarray_test.cpp': No such file or directory
+C:\Users\lisal\OneDrive\Documents\GitHub\cs311-2023-03\fsarray_test.cpp(12,10): fatal  error C1083: Cannot open include file: 'fsarray2.hpp': No such file or directory

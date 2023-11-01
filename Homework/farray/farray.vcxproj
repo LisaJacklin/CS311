@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\doctest.h" />
-    <ClInclude Include="fsarray.hpp" />
+    <ClInclude Include="fsarray2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\cs311-2023-03\fsarray_test.cpp" />
