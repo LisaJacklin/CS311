@@ -82,21 +82,17 @@ bool checkSorted(FDIter first,FDIter last)
     return is_sorted(first, last);
 }
 
-//need to define the recursive function!
-namespace {
-    int gcdRecursive(int a, int b) {
-        if (b == 0) return a;  // Base case: if b is 0, then a is the GCD
-        return gcdRecursive(b, a % b);  // Recursive case: gcd(a, b) = gcd(b, a % b)
-    }
-}
 
 //Exercise D
 //Preconditions: a and b and both not zero, 
 //               a and b are both positive
 int gcd(int a,int b)
 {
-    //since a separate function was built here, we can simply call it.    
-    return gcdRecusive(a, b);
+         if (b == 0) return a;  // Base case: if b is 0, then a is the GCD
+         if (a == 0 ) return b;
+
+        return gcd(b, a % b);
+
    
 }
 
