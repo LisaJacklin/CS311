@@ -10,6 +10,7 @@
 #include "llnode.hpp"
 #include <stdexcept>   // for std::out_of_range
 #include <functional>  //for std::function
+#include <cstddef>    // 
 using std::function;
 
 
@@ -78,24 +79,23 @@ bool checkSorted(FDIter first,FDIter last)
         ++next;
     }
     //using is_sorted to check that things are sorted
-    return std::is_sorted(first, last);
+    return is_sorted(first, last);
 }
+
+//need to define the recursive function!
+namespace {
+    int gcdRecursive(int a, int b) {
+        if (b == 0) return a;  // Base case: if b is 0, then a is the GCD
+        return gcdRecursive(b, a % b);  // Recursive case: gcd(a, b) = gcd(b, a % b)
+    }
+}
+
 //Exercise D
 //Preconditions: a and b and both not zero, 
 //               a and b are both positive
 int gcd(int a,int b)
 {
-    
-
-    //note that this takes a / b to give the output
-
-    if (b == 0)  //when b is zero
-       {return a;} 
-    else if (a > b) //need to check for if a is greater than b as well
-        {return gcd(b, a);}
-    else  //and lastly the general condition for gcd.
-       {return gcd(a, b % a); } 
-    
+    //since a separate function was built here, we can simply call it.    
     return gcdRecusive(a, b);
    
 }
