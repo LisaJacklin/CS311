@@ -2,8 +2,12 @@
 //Lisa Jacklin
 //2023/09/14
 
+
 #ifndef FILE_FSARRAY_HPP_INCLUDED
 #define FILE_FSARRAY_HPP_INCLUDED
+
+#include <algorithm> //for std::copy, std::equal
+#include <cstddef> //for std::size_t
 
 template<typename data_T> //this is what will change the class below
 class FSArray {
@@ -15,8 +19,25 @@ public:
 
 	//----------------------------------------------------
 	//Class Constructors
-	FSArray():_size(8), _data(new value_type[_size]) {} 
-	//this needs object of size 8.
+	//this only takes objects of size 8
+	FSArray()
+		:_data(new data_T[8]), _size(8) {} 
+
+	//now for any value of size n, an explicit constructor is required
+	explicit FSArray(size_type n)
+		:_data(new data_T[n]()), _size(n) {}
+
+	FSArray(size_type n, const T& val) 
+		: _data(new data_T[n]), _size(n) 
+		{
+			std::fill(_data, _data + _size, val);
+		}
+
+	//deconstructor
+	~FSArray() {
+		delete[] _data;
+	}; //frees any dynamically allocated memory
+
 
 	//----------------------------------------------------
 	//parameter constructors
@@ -30,21 +51,21 @@ public:
 	FSArray(int& arraySize, const value_type& value) 
 	:size(_size), _data(new value_type[_size]) {} //need to include data type!
 
-	//deconstructor
-	~FSArray() {
-		delete[] _data;
-	}; //frees any dynamically allocated memory
 
-	//now to build the other constuctors...
 	//copy constructor
-	FSArray(const FSArray& other) :_size(other._size), _data(value_type[_size]) {
-		copyFrom(other);
-	}
+	FSArray(const FSArray& other) 
+		:_size(other._size), _data(new data_T[other._size]) 
+		{// note that std::copy is required here!
+		std::copy(other._data, other._data + other._size, _data);
+		}
+
 	//move constructor
-	FSArray(FSArray&& other) noexcept :_size(other._size), _data(other._data) {
-		other._size = 0;
-		other._data = nullptr;
-	}
+	FSArray(FSArray&& other) noexcept 
+		:_size(other._size), _data(other._data)
+		{
+			other._size = 0;
+			other._data = nullptr;
+		}
 
 	//copy assignment
 	FSArray& operator=(const FSArray& other) {

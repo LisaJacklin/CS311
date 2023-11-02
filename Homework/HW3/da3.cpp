@@ -7,35 +7,40 @@
 
 #include "da3.hpp"     // For Assignment 3 prototypes & templates
 
-#include <functional>
+#include <functional> //for std::function
 using std::function;
 
 //Exercise B
+//this is to make sure that ff() throws
 void didItThrow(const function<void()> & ff,
                 bool & threw)
-{ // need to try and catch the exceptions
+{ 
     try {
         ff(); //takes no par!
         threw = false;
-    }
-    catch (const std::exception&) {
+    } //note ... as this is special!
+    catch (...) {
         threw = true;
+        throw; //since this condition is true, we need to throw an exception
     }
 
 }
 
 //Exercise D
+//Preconditions: a and b and both not zero, 
+//               a and b are both positive
 int gcd(int a,
         int b)
 {
     //note that this takes a / b to give the output
 
-    if (b == 0) {
+    if (b == 0)  //part 1 when b is zero
         return a;
-    }
-    else {
-        return gcd(b, a % b);
-    }
+    else if (a > b) //need to check for if a is greater than b as well
+        return gcd(b, a);
+    else  //and lastly the general condition for gcd.
+        return gcd(b, a % b); 
+    
    
 }
 

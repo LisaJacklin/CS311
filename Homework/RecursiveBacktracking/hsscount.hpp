@@ -12,6 +12,10 @@ int hssCount(int dim_x, int dim_y,
              int start_x, int start_y,
              int finish_x, int finish_y);
 
+//recursive definition
+int hssCount_recurse(int dim_x, int dim_y, int hole_x, int hole_y,
+    int finish_x, int finish_y, int current_x, int current_y,
+    int visited);
 /*
 dim_x, dim_y:  dimensions of the board in x and y
 hole_x, hole_y: cordinates of the hole

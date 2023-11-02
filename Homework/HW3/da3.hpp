@@ -22,35 +22,28 @@ ValueType lookup(const LLNode<ValueType> * head,
     //Remember, we need to throw exceptions
     //so the first one to throw, is if the list is empty
     if (!head) {
-        throw std::out_of_range("List is empty");
+        throw std::out_of_range("List is empty" + index);   
     }
 
-    //need to throw another exception if the index size is zero 
-    //an exception shouldbe thown that index is  negative or at least size.
-    //lookup should then throw an exception....
-    if (index !>= 0 && index! < 0 )
-    {
-        throw std::out_of_range("Size of zero");
-    }
-
+    //now to check the value of the index
+    if (index == 0) 
+        return head ->_data;
+  
     const LLNode <ValueType>* current = head; //to determine how many to iterate
     std::size_t counter = 0; //counter starts at zero
 
-    while (current) 
+    //trying a do loop for each count for size
+   do counter++  while (current = current ->_next) 
     {
-        if (counter == index) {
-            return current->_data;
+        //need to check for null here!
+        if (counter == nullptr) {
+            throw std::out_of_range("lookup: invalid Index value!" + index);
         }
 
         current = current->_next;
         ++counter;
-    }
-    return ValueType();  // DUMMY
-
-    //I THINK THIS IS WHERE i AM HAVING TROUBLE AS IT STATES 'LOOKUP DOES NOT THROW'
-    throw std::out_of_range("index out of range");
-    //note that once this is thrown, the functions WHAT member should return a sting 
-
+    };
+  
 }
 
 //Exercise B
