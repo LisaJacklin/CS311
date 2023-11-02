@@ -41,6 +41,7 @@ ValueType lookup(const LLNode<ValueType> * head, std::size_t index)
         ++counter;
     }
   
+  throw std::out_of_range("Out of Range" + index);
 }
 
 //Exercise B
@@ -74,10 +75,10 @@ bool checkSorted(FDIter first,FDIter last)
         if (*next < *first) {
             return false;
         }
-        ++first;
         ++next;
     }
-    return true;
+    //using is_sorted to check that things are sorted
+    return std::is_sorted(first, last);
 }
 //Exercise D
 //Preconditions: a and b and both not zero, 
@@ -90,13 +91,12 @@ int gcd(int a,int b)
 
     if (b == 0)  //when b is zero
        {return a;} 
-    else if (a == 0 ) //and of course checking the other value as well
-        {return b;}
     else if (a > b) //need to check for if a is greater than b as well
         {return gcd(b, a);}
     else  //and lastly the general condition for gcd.
-       {return gcd(b, a % b); } 
+       {return gcd(a, b % a); } 
     
+    return gcdRecusive(a, b);
    
 }
 
