@@ -95,4 +95,6 @@ int gcd(int a,int b)
 
    
 }
+//to make sure that this source file compiles, I need a main...
+int main(){}
 
