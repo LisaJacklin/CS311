@@ -16,8 +16,7 @@
 
 //Exercise A
 template <typename ValueType>
-ValueType lookup(const LLNode<ValueType> * head,
-                 std::size_t index)
+ValueType lookup(const LLNode<ValueType> * head, std::size_t index)
 {
     //Remember, we need to throw exceptions
     //so the first one to throw, is if the list is empty
@@ -27,13 +26,13 @@ ValueType lookup(const LLNode<ValueType> * head,
 
     //now to check the value of the index
     if (index == 0) 
-        return head ->_data;
+       {return head ->_data;} 
   
     const LLNode <ValueType>* current = head; //to determine how many to iterate
     std::size_t counter = 0; //counter starts at zero
 
     //trying a do loop for each count for size
-   do counter++  while (current = current ->_next) 
+   do counter++  
     {
         //need to check for null here!
         if (counter == nullptr) {
@@ -42,19 +41,17 @@ ValueType lookup(const LLNode<ValueType> * head,
 
         current = current->_next;
         ++counter;
-    };
+    } while (current = current ->_next);
   
 }
 
 //Exercise B
 // Implementation in source file
-void didItThrow(const std::function<void()> & ff,
-                bool & threw);
+void didItThrow(const std::function<void()> & ff,bool & threw);
 
 //Exercise C
 template <typename FDIter>
-bool checkSorted(FDIter first,
-                 FDIter last)
+bool checkSorted(FDIter first,FDIter last)
 {
     if (first == last) {
         return true; //empty range might as well be sorted
@@ -76,8 +73,7 @@ bool checkSorted(FDIter first,
 //Exercise D
 // Implementation in source file
 //note that this is here to calculate the greatest common denominators
-int gcd(int a,
-        int b);
+int gcd(int a,int b);
 
 
 #endif  //#ifndef FILE_DA3_HPP_INCLUDED
