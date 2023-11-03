@@ -11,6 +11,7 @@
 #include <stdexcept>   // For std::out_of_range
 #include <functional>  // For std::function
 #include <cstddef>     // For std::size_t
+#include <string>
 
 // Exercise A
 template <typename ValueType>
