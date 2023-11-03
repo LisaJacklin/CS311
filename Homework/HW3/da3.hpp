@@ -1,4 +1,4 @@
-// da3.hpp  Writeup from SKELETON
+// da3.hpp
 // Lisa Jacklin
 // 2023-09-24
 // Updated Submission 11/1/23
@@ -12,31 +12,24 @@
 #include "llnode.hpp"  // For LLNode
 #include <cstddef>     // For std::size_t
 #include <functional>  // For std::function
-#include <stdexcept>   // for std::out_of_range
-#include <algorithm>   // for std::is_sorted
+#include <stdexcept>   // For std::out_of_range
+#include <algorithm>   // For std::is_sorted
+#include "da3.hpp"  // For template implementations
 
-//note that for simplification, i'm moving anything other than declarations to cpp
-//Exercise A
+
+// Exercise A
 template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> * head, std::size_t index);
 
-//Exercise B
-// Implementation in source file
-void didItThrow(const std::function<void()> & ff,bool & threw);
+// Exercise B
+void didItThrow(const std::function<void()> & ff, bool & threw);
 
-//Exercise C
+// Exercise C
 template <typename FDIter>
-bool checkSorted(FDIter first,FDIter last)
-{
-    //using is_sorted to check that things are sorted
-    return std::is_sorted(first, last);
-}
+bool checkSorted(FDIter first, FDIter last);
 
+// Exercise D
+int gcd(int a, int b);
 
-//Exercise D
-// Implementation in source file
-//note that this is here to calculate the greatest common denominators
-int gcd(int a,int b);
 
 #endif  //#ifndef FILE_DA3_HPP_INCLUDED
-

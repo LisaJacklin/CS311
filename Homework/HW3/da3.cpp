@@ -1,78 +1,76 @@
-// da3.cpp  writeup from SKELETON
+// da3.cpp
 // Lisa Jacklin
 // 2023-09-24
-//Updated 2023-11-01
+// Updated 2023-11-01
 //
 // For CS 311 Fall 2023
 // Source for Assignment 3 functions
 
 #include "da3.hpp"     // For Assignment 3 prototypes & templates
 #include "llnode.hpp"
-#include <stdexcept>   // for std::out_of_range
-#include <functional>  //for std::function
-#include <cstddef>    // 
-using std::function;
+#include <stdexcept>   // For std::out_of_range
+#include <functional>  // For std::function
+#include <cstddef>     // For std::size_t
 
-
-//Exercise A
+// Exercise A
 template <typename ValueType>
-ValueType lookup(const LLNode<ValueType> * head, std::size_t index)
-{
-    //Remember, we need to throw exceptions
-    //so the first one to throw, is if the list is empty
-    if (head = nullptr) {
-        throw std::out_of_range("List is empty" + index);   
+ValueType lookup(const LLNode<ValueType> * head, std::size_t index) {
+    if (!head) {
+        throw std::out_of_range("List is empty");
     }
 
-    //now to check the value of the index
-    if (index == 0) 
-       {return head ->_data;} 
-  
-    const LLNode <ValueType>* current = head; //to determine how many to iterate
-    std::size_t counter = 0; //counter starts at zero
-
-    //trying a do loop for each count for size
-   while (current = current ->_next) {
-  
-        if (head == nullptr) {
-            throw std::out_of_range("lookup: invalid Index value!" + index);
+    for (std::size_t i = 0; i < index; ++i) {
+        head = head->_next;
+        if (!head) {
+            throw std::out_of_range("Index out of range");
         }
-
-        current = current->_next;
-        ++counter;
     }
-  
-  throw std::out_of_range("Out of Range" + index);
+    return head->_data;
 }
 
-//Exercise B
-//this is to make sure that ff() throws
-void didItThrow(const function<void()> & ff, bool & threw)
-{ 
-    threw = false;
+// Force instantiation of lookup for int and std::string, since we cannot
+// have the template in the .cpp file.
+template int lookup(const LLNode<int> * head, std::size_t index);
+template std::string lookup(const LLNode<std::string> * head, std::size_t index);
 
+// Exercise B
+void didItThrow(const std::function<void()> & ff, bool & threw) {
     try {
-        ff(); //takes no par!
-    } //note ... as this is special!
-    catch (...) {
+        ff();
+        threw = false;
+    } catch (...) {
         threw = true;
-        throw; //since this condition is true, we need to throw an exception
+        throw;  // Rethrow the current exception
     }
-
 }
 
-//Exercise D
-//Preconditions: a and b and both not zero, 
-//               a and b are both positive
-int gcd(int a,int b)
-{
-         if (b == 0) return a;  // Base case: if b is 0, then a is the GCD
-         if (a == 0 ) return b;
-
-        return gcd(b, a % b);
-
-   
+// Exercise C
+template <typename FDIter>
+bool checkSorted(FDIter first, FDIter last) {
+    return std::is_sorted(first, last);
 }
-//to make sure that this source file compiles, I need a main...
-//int main(){}
 
+// Force instantiation of checkSorted for iterators of int and std::string.
+template bool checkSorted(std::vector<int>::const_iterator first, std::vector<int>::const_iterator last);
+template bool checkSorted(std::vector<std::string>::const_iterator first, std::vector<std::string>::const_iterator last);
+
+namespace {
+
+// Recursive helper function for gcd
+int gcd_helper(int a, int b) {
+    if (b == 0) return a;
+    return gcd_helper(b, a % b);
+}
+
+} // end anonymous namespace
+
+// Exercise D
+int gcd(int a, int b) {
+    if (a < 0 || b < 0) {
+        throw std::invalid_argument("gcd: arguments must be nonnegative");
+    }
+    if (a == 0 && b == 0) {
+        throw std::invalid_argument("gcd: at least one argument must be positive");
+    }
+    return gcd_helper(a, b);
+}
