@@ -61,28 +61,6 @@ void didItThrow(const function<void()> & ff, bool & threw)
 
 }
 
-//Exercise C
-template <typename FDIter>
-bool checkSorted(FDIter first,FDIter last)
-{
-    if (first == last) {
-        return true; //empty range might as well be sorted
-  }
-
-    FDIter next = first;
-    ++next;
-
-    while (next != last) { // iterating so long as we aren't at the last item
-        if (*next < *first) {
-            return false;
-        }
-        ++next;
-    }
-    //using is_sorted to check that things are sorted
-    return is_sorted(first, last);
-}
-
-
 //Exercise D
 //Preconditions: a and b and both not zero, 
 //               a and b are both positive
@@ -96,5 +74,5 @@ int gcd(int a,int b)
    
 }
 //to make sure that this source file compiles, I need a main...
-int main(){}
+//int main(){}
 

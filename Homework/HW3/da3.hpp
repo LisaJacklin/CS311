@@ -13,6 +13,7 @@
 #include <cstddef>     // For std::size_t
 #include <functional>  // For std::function
 #include <stdexcept>   // for std::out_of_range
+#include <algorithm>   // for std::is_sorted
 
 //note that for simplification, i'm moving anything other than declarations to cpp
 //Exercise A
@@ -25,7 +26,12 @@ void didItThrow(const std::function<void()> & ff,bool & threw);
 
 //Exercise C
 template <typename FDIter>
-bool checkSorted(FDIter first,FDIter last);
+bool checkSorted(FDIter first,FDIter last)
+{
+    //using is_sorted to check that things are sorted
+    return std::is_sorted(first, last);
+}
+
 
 //Exercise D
 // Implementation in source file
