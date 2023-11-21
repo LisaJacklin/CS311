@@ -43,16 +43,6 @@ private:
     }
 
     // Helper function for in-order traversal
-    //void inOrderTraversal(const Node* node, std::vector<Value>& elements) const {
-    //    if (node) {
-    //        // Traverse left subtree, process current node, then traverse right subtree
-    //        inOrderTraversal(node->left.get(), elements);
-    //        elements.push_back(node->data);
-    //        inOrderTraversal(node->right.get(), elements);
-    //    }
-    //}
-
-    // Helper function for in-order traversal
     template<typename Iter>
     void inOrderTraversal(const Node* node, Iter& iter) const {
         if (node) {
@@ -67,13 +57,6 @@ public:
     void insert(const Value& value) {
         insertNode(root, value);
     }
-
-    // Public method to perform in-order traversal and return sorted elements
-    //std::vector<Value> inOrder() const {
-    //    std::vector<Value> elements;
-    //    inOrderTraversal(root.get(), elements);
-    //    return elements; // Return the elements in sorted order
-    //}
 
     // Public method to perform in-order traversal and write sorted elements
     template<typename Iter>
