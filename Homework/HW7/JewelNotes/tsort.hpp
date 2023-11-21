@@ -1,7 +1,6 @@
-// tsort.hpp  SKELETON
-// Glenn G. Chappell
+// tsort.hpp
+// Lisa Jacklin && Jewel Maldonado
 // 2023-11-12
-//
 // For CS 311 Fall 2023
 // Header for function template treesort
 // There is no associated source file.
@@ -10,40 +9,100 @@
 #define FILE_TSORT_HPP_INCLUDED
 
 #include <iterator>
-// For std::iterator_traits
-
-// *******************************************************
-// * YOU MIGHT WANT TO GET RID OF THE FOLLOWING INCLUDES *
-// *******************************************************
-
-#include <algorithm>
-// For std::stable_sort, std::move
+#include <memory>
 #include <vector>
-// For std::vector
-#include <iterator>
-// For std::distance
 
+// BSTree - Binary Search Tree class
+template<typename Value>
+class BSTree {
+private:
+    // Node structure for BST
+    struct Node {
+        Value data; // Data stored in the node
+        std::unique_ptr<Node> left, right; // Unique pointers to left and right children
+
+        // Constructor for Node, initializes data and nullifies children pointers
+        Node(const Value& value) : data(value), left(nullptr), right(nullptr) {}
+    };
+
+    std::unique_ptr<Node> root; // Root node of the BST
+
+    // Helper function to insert a value into the BST
+    void insertNode(std::unique_ptr<Node>& node, const Value& value) {
+        if (!node) {
+            // If the node is null, create a new node with the value
+            node = std::make_unique<Node>(value);
+            return;
+        }
+        // Recursively find the correct position and insert the node
+        if (value < node->data) {
+            insertNode(node->left, value);
+        } else {
+            insertNode(node->right, value);
+        }
+    }
+
+    // Helper function for in-order traversal
+    //void inOrderTraversal(const Node* node, std::vector<Value>& elements) const {
+    //    if (node) {
+    //        // Traverse left subtree, process current node, then traverse right subtree
+    //        inOrderTraversal(node->left.get(), elements);
+    //        elements.push_back(node->data);
+    //        inOrderTraversal(node->right.get(), elements);
+    //    }
+    //}
+
+    // Helper function for in-order traversal
+    template<typename Iter>
+    void inOrderTraversal(const Node* node, Iter& iter) const {
+        if (node) {
+            inOrderTraversal(node->left.get(), iter);
+            *iter++ = node->data;  // Write directly to the original range
+            inOrderTraversal(node->right.get(), iter);
+        }
+    }
+
+public:
+    // Public method to insert a value into the BST
+    void insert(const Value& value) {
+        insertNode(root, value);
+    }
+
+    // Public method to perform in-order traversal and return sorted elements
+    //std::vector<Value> inOrder() const {
+    //    std::vector<Value> elements;
+    //    inOrderTraversal(root.get(), elements);
+    //    return elements; // Return the elements in sorted order
+    //}
+
+    // Public method to perform in-order traversal and write sorted elements
+    template<typename Iter>
+    void inOrder(Iter iter) const {
+        inOrderTraversal(root.get(), iter);
+    }
+};
 
 // treesort
 // Sort a given range using Treesort.
 // Pre:
-//     ???
+//     [first, last) is a valid range. 
+// Valid range denoted by two iterators, first and last. 
+// The range includes the element pointed to by first but does not include the element pointed to by last.
 // Exception safety guarantee:
-//     ???
+//     Strong guarantee, provided that copying elements does not throw.
+//     State of the program remains unchanged. 
 template<typename FDIter>
-void treesort(FDIter first, FDIter last)
-{
-    // Value is the type that FDIter points to
+void treesort(FDIter first, FDIter last) {
     using Value = typename std::iterator_traits<FDIter>::value_type;
+    BSTree<Value> tree; // Create a BSTree instance
 
-    // THE FOLLOWING IS DUMMY CODE. IT WILL PASS ALL TESTS, BUT IT DOES
-    // NOT MEET THE REQUIREMENTS OF THE ASSIGNMENT.
-    std::vector<Value> buff(std::distance(first, last));
-    std::move(first, last, buff.begin());
-    std::stable_sort(buff.begin(), buff.end());
-    std::move(buff.begin(), buff.end(), first);
+    // Insert elements into the BST
+    for (FDIter it = first; it != last; ++it) {
+        tree.insert(*it); // Insert each element in the range into the tree
+    }
+
+    // Perform in-order traversal to get sorted elements and write them directly into the original range
+    tree.inOrder(first);
 }
 
-
 #endif //#ifndef FILE_TSORT_HPP_INCLUDED
-
