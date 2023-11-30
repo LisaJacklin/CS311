@@ -97,3 +97,53 @@ If any other issues pop up or coding notes arise they will be put here.
 #### 11. **Coding Standards and Documentation**
    - Follow good coding practices with meaningful test case names and clear, concise code.
    - Document your test cases, explaining what each test is checking for.
+output test 1:
+```bash
+Number of distinct words: 45
+
+2023: 1
+2023-11-28: 1
+311: 1
+8,: 1
+A: 1
+And: 1
+Assignment: 1
+CS: 1
+Can: 2
+Chappell: 1
+Exercise: 1
+Fall: 1
+For: 1
+G.: 1
+Glenn: 1
+Next: 1
+Test: 1
+What: 1
+a: 3
+again.: 1
+change: 2
+correctly: 2
+count: 2
+ending: 1
+file: 2
+for: 1
+if: 1
+input: 1
+is: 2
+it: 1
+line-ending: 1
+line.: 1
+line?: 1
+long: 2
+marker?: 1
+newline?: 1
+no: 1
+the: 1
+there: 1
+we: 2
+when: 1
+with: 1
+word: 100000
+wordcount_test.txt: 1
+you: 2
+```
