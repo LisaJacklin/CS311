@@ -1,3 +1,6 @@
+# Assignment 8
+##### Jewel Maldonado && Lisa Jacklin 
+
 ## Procedures
 - Your answers should consist of two files: wordcount.cpp, from Exercise A, and squarer_test.cpp, from Exercise B.
 
@@ -91,7 +94,7 @@ If this is true, then the error was due to the end of the file, and so there is 
     - Robustness means that the user is allowed to do strange things, and files are allowed to contain strange data, but the program never behaves badly. 
 Test the strange cases. For example, what if the user, when prompted for a filename, just hits ENTER? What if they type a bunch of blanks and then hit ENTER? What about a filename with a blank in the middle? What about the name of a file that does not exist? A file that exists but cannot be read? An empty file? An executable file? a directory? Etc.
 
-
+----------------------------------
 
 ### Exercise B — Writing a Test Suite
 #### Purpose
