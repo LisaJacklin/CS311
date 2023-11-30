@@ -1,3 +1,6 @@
+In order to understand the fundamentals of the homework task this outline will provide clearer points on what is required. The outlines have been provided using Chat GPT to quickly summarize main points of the task into a more concise and easy to read manner.
+If any other issues pop up or coding notes arise they will be put here.
+
 ### Solution Outline for Exercise A - Program: Counting Words
 
 #### 1. **Understanding the Task**
