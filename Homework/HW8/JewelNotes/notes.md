@@ -195,3 +195,101 @@ public:
 #endif // SQUARER_H
 
 ```
+
+##### Test Cases for `squarer_test.cpp`  
+
+1. **Zero and One**
+   ```cpp
+   TEST_CASE("Squaring Zero and One") {
+       Squarer sq;
+       REQUIRE(sq(0) == 0);
+       REQUIRE(sq(1) == 1);
+   }
+   ```
+
+2. **Large Numbers**
+   ```cpp
+   TEST_CASE("Squaring Large Numbers") {
+       Squarer sq;
+       long large_number = 1000000;
+       REQUIRE(sq(large_number) == large_number * large_number);
+   }
+   ```
+
+3. **Very Small Floating-Point Numbers**
+   ```cpp
+   TEST_CASE("Squaring Very Small Floating-Point Numbers") {
+       Squarer sq;
+       double small_number = 0.0001;
+       REQUIRE(doctest::Approx(sq(small_number)) == small_number * small_number);
+   }
+   ```
+
+4. **Precision with Floating-Points**
+   ```cpp
+   TEST_CASE("Precision with Floating-Point Squaring") {
+       Squarer sq;
+       float number = 1.2345f;
+       REQUIRE(doctest::Approx(sq(number)) == number * number);
+   }
+   ```
+
+5. **Boundary Values**
+   ```cpp
+   TEST_CASE("Squaring Boundary Values") {
+       Squarer sq;
+       REQUIRE(sq(std::numeric_limits<int>::max()) == std::numeric_limits<int>::max() * (long long)std::numeric_limits<int>::max());
+       REQUIRE(sq(std::numeric_limits<int>::min()) == std::numeric_limits<int>::min() * (long long)std::numeric_limits<int>::min());
+   }
+   ```
+
+6. **Negative Zero for Floating-Points**
+   ```cpp
+   TEST_CASE("Squaring Negative Zero (Floating-Point)") {
+       Squarer sq;
+       double neg_zero = -0.0;
+       REQUIRE(doctest::Approx(sq(neg_zero)) == 0.0);
+   }
+   ```
+
+7. **Different Data Types**
+   ```cpp
+   TEST_CASE("Squaring Different Data Types") {
+       Squarer sq;
+       REQUIRE(sq(static_cast<int>(2)) == 4);
+       REQUIRE(doctest::Approx(sq(static_cast<double>(2.5))) == 6.25);
+       // Add more tests for other data types
+   }
+   ```
+
+8. **Non-Numeric Types (Illustrative)**
+   ```cpp
+   // Note: This test is for illustration and may cause compilation errors
+   TEST_CASE("Attempting to Square Non-Numeric Types") {
+       Squarer sq;
+       std::string str = "test";
+       // REQUIRE(sq(str) == ?); // This line is expected to cause a compilation error
+   }
+   ```
+
+9. **NaN and Infinity for Floating-Points**
+   ```cpp
+   TEST_CASE("Squaring NaN and Inf (Floating-Point)") {
+       Squarer sq;
+       double nan_value = std::numeric_limits<double>::quiet_NaN();
+       double inf_value = std::numeric_limits<double>::infinity();
+
+       REQUIRE(std::isnan(sq(nan_value)));
+       REQUIRE(sq(inf_value) == std::numeric_limits<double>::infinity());
+   }
+   ```
+
+10. **Stress Test**
+    ```cpp
+    TEST_CASE("Stress Test for Squarer") {
+        Squarer sq;
+        for (int i = -10000; i <= 10000; ++i) {
+            REQUIRE(sq(i) == i * i);
+        }
+    }
+    ```
