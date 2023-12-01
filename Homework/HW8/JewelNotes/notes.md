@@ -147,3 +147,51 @@ word: 100000
 wordcount_test.txt: 1
 you: 2
 ```
+
+
+Correct Implentation of squarer to test:
+```cpp
+// squarer.h - Correct version
+// A simple class to square numeric values
+
+#ifndef SQUARER_H
+#define SQUARER_H
+
+class Squarer {
+public:
+    // Function call operator to square a numeric value
+    template<typename T>
+    T operator()(const T & value) const {
+        return value * value;
+    }
+};
+
+#endif // SQUARER_H
+```
+Incorrect Implementation of squarer to test:
+```cpp
+// squarer.h - Incorrect version
+// A simple class to square numeric values with intentional errors
+
+#ifndef SQUARER_H
+#define SQUARER_H
+
+class Squarer {
+public:
+    // Function call operator with intentional errors
+    template<typename T>
+    T operator()(const T & value) const {
+        // Error 1: Squaring is incorrectly implemented
+        return value + value;
+
+        // Error 2: Handling for negative values is incorrect (uncomment to test)
+        // if (value < 0) return -value * value;
+
+        // Error 3: Floating-point handling is incorrect (uncomment to test)
+        // if (std::is_floating_point<T>::value) return value * value * value;
+    }
+};
+
+#endif // SQUARER_H
+
+```
