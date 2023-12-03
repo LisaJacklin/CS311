@@ -33,27 +33,66 @@
 template<typename FDIter>
 void treesort(FDIter first, FDIter last)
 {
-   // Value is the type that FDIter points to
-      using Value = typename std::iterator_traits<FDIter>::value_type;
-
-      // Take two forward iterators to specify the range
-      // Test if both iterators are equal; the range will be empty
-      if (first == last) {
-          // The range is empty, nothing to sort
-          return;
-      }
-
-      // Sort the given range in a stable manner using the < operator
-      std::stable_sort(first, last);
-
-      // Need to make sure that stored data is in the same place as the original data
-      // The function must use the treesort algorithm from class (view slides)
-      // Note: The current implementation just uses std::stable_sort for simplicity.
-      // You may replace this with your treesort algorithm as needed.
-
-      // If you have a specific treesort algorithm, replace the std::stable_sort above
-      // with your implementation.
+  // Check if the range is empty
+  if (first == last) {
+      return;
   }
+
+  // Build the binary search tree using move semantics
+  auto root = buildTree<typename std::iterator_traits<FDIter>::value_type>(first, last);
+
+  // Traverse the tree in in-order to retrieve sorted elements
+  try {
+      inOrderTraversal(root.get(), first);
+  } catch (...) {
+      // If an exception occurs during traversal, let it propagate
+      throw;
+  }
+  }
+
+
+// Definition of TreeNode for Binary Search Tree
+template <typename T>
+struct TreeNode {
+    T data;
+    std::unique_ptr<TreeNode<T>> left;
+    std::unique_ptr<TreeNode<T>> right;
+
+    TreeNode(const T& value) : data(value), left(nullptr), right(nullptr) {}
+};
+
+// Function to insert a value into the Binary Search Tree
+template <typename T>
+void insert(std::unique_ptr<TreeNode<T>>& root, T value) {
+    if (!root) {
+        root = std::make_unique<TreeNode<T>>(std::move(value));
+    } else if (value < root->data) {
+        insert(root->left, std::move(value));
+    } else {
+        insert(root->right, std::move(value));
+    }
+}
+
+// Function for in-order traversal of the Binary Search Tree
+template <typename T, typename FDIter>
+void inOrderTraversal(const TreeNode<T>* root, FDIter& it) {
+    if (root) {
+        inOrderTraversal(root->left.get(), it);
+        *it = root->data;
+        ++it;
+        inOrderTraversal(root->right.get(), it);
+    }
+}
+
+// Function to build a Binary Search Tree from a range of elements
+template <typename T, typename FDIter>
+std::unique_ptr<TreeNode<T>> buildTree(FDIter first, FDIter last) {
+    std::unique_ptr<TreeNode<T>> root = nullptr;
+    for (FDIter it = first; it != last; ++it) {
+        insert(root, *it);
+    }
+    return root;
+}
 
 
 #endif //#ifndef FILE_TSORT_HPP_INCLUDED
