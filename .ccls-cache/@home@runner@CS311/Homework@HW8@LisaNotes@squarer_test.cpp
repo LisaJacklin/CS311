@@ -17,6 +17,7 @@
 #include "doctest.h"
 #include "squarer.h"
 
+
 TEST_CASE("Testing const and non-const Squarer objects") {
     Squarer sq;
     const Squarer constSq;
