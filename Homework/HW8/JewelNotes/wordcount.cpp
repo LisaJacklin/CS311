@@ -6,7 +6,7 @@
 //  - Prompts the user for a filename.
 //  - Reads words from the file.
 //  - Counts the occurrences of each word using a map.
-//  - Handles various edge cases and errors.
+//  - Handles edge cases and errors.
 
 #include <iostream>
 #include <fstream>
