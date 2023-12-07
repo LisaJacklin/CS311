@@ -82,7 +82,7 @@ TEST_CASE("Squaring Very Small Floating-Point Numbers") {
     REQUIRE(doctest::Approx(sq(small_number)) == small_number * small_number);
 }
 
-
+//unnecesary
 //TEST_CASE("Stress Test for Squarer") {
 //    Squarer sq;
 //    for (int i = -10000; i <= 10000; ++i) {
