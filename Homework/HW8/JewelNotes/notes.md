@@ -198,7 +198,7 @@ public:
 
 ##### Test Cases for `squarer_test.cpp`  
 
-1. **Zero and One**
+- [x]**Zero and One**
    ```cpp
    TEST_CASE("Squaring Zero and One") {
        Squarer sq;
