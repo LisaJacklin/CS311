@@ -1,11 +1,14 @@
-// quicksort2.cpp
+// heap_sort.cpp
 // Glenn G. Chappell
-// Started: 2023-10-06
-// Updated: 2023-10-09
+// Started: 2023-11-12
+// Updated: 2023-11-13
 //
 // For CS 311 Fall 2023
-// Quicksort
-// Implementation #2: Optimized
+// Heap Sort
+// Requires heap_algs.hpp
+
+#include "heap_algs.hpp"
+// For Heap algorithms
 
 #include <iostream>
 using std::cout;
@@ -20,12 +23,9 @@ using std::vector;
 using std::size_t;
 #include <utility>
 using std::swap;
-using std::move;
 #include <iterator>
 using std::begin;
 using std::end;
-#include <algorithm>
-using std::iter_swap;
 #include <chrono>
 // Everything from <chrono> is preceded by std::
 #include <cassert>
@@ -39,212 +39,21 @@ const size_t BIGSIZE = 100'000'000;
 const int MAXVAL = 999'999'999;
 
 
-// Function insertionSort copied from file insertion_sort.cpp
-
-// insertionSort
-// Sort a range using Insertion Sort.
-// Requirements on Types:
-//     RAIter is a random-access iterator type.
-//     The value type of RAIter must have a copy ctor, copy assignment,
-//      and operator<.
-//     operator< is a total order on the value type of RAIter.
-// Pre:
-//     [first, last) is a valid range.
-template <typename RAIter>
-void insertionSort(RAIter first, RAIter last)
-{
-    // NOTE. We *could* rewrite the following code using iterators
-    //  instead of indices. Then we this function would be able to take
-    //  parameters that are bidirectional iterators, instead of only
-    //  random-access iterators.
-
-    // Compute size of range
-    size_t size = last - first;
-
-    // Iterate through items, inserting each into earlier items
-    for (size_t i = 1; i != size; ++i)
-    {
-        // We need to insert item i into sorted list of items 0 .. i-1
-
-        auto save_item_i = std::move(first[i]);
-
-        // Find the spot for item i, moving up other items as we go
-        size_t k;  // We use k after the loop, so declare it outside
-        for (k = i; k != 0; --k)
-            // Be careful! Backwards loop with unsigned counter
-        {
-            if (!(save_item_i < first[k-1]))
-                break;
-            first[k] = std::move(first[k-1]);
-        }
-
-        // Item i should be in spot k; put it there
-        first[k] = std::move(save_item_i);
-        // NOTE. I had "if (k != i)" above, but that would leave
-        //  first[i] in a moved-from state when k == i.
-    }
-}
-
-
-// hPartition
-// Partitions a sequence about a given pivot. Uses Hoare Algorithm.
-// Returns the new pivot position via a reference parameter.
-//
-// Requirements on Types:
-//     RAIter is a random-access iterator type.
-//     The value type of RAIter must have copy=, operator<.
-//     operator< must be a total order on the value type of RAIter.
-// Pre:
-//     [first, last) is a valid nonempty range.
-//     pivotiter is an iterator in the range [first, last).
-// NOTE. We could make Hoare Partition work with bidirectional
-// iterators, but it would be messier.
-template <typename RAIter>
-void hPartition(RAIter first, RAIter last,  // Range to partition
-                RAIter & pivotiter)         // Iterator to pivot
-{
-    // Put the pivot at the start of the list
-    if (first != pivotiter)
-        iter_swap(first, pivotiter);
-
-    // first points to the pivot
-
-    // Iterator left: all items before it have !(PIVOT < ITEM)
-    auto left = first+1;
-    // Iterator right: all items after it have !(ITEM < PIVOT)
-    auto right = last-1;
-
-    // In the loop below, we stop when items before left + items
-    //  after right are the entire list.
-    while (left <= right)
-    {
-        // Move left & right in as far as we can
-        while (left <= right && !(*first < *left))
-            ++left;
-        while (left <= right && !(*right < *first))
-            --right;
-
-        // If left & right have not collided, swap their items
-        if (left < right)
-        {
-            iter_swap(left, right);
-            ++left;
-            --right;
-        }
-    }
-    assert (right >= first);
-    assert (right+1 == left);
-
-    // Note new pivot position for caller, and put pivot there
-    pivotiter = right;
-    if (first != pivotiter)
-        iter_swap(first, pivotiter);
-}
-
-
-// medianOf3
-// Given 3 iterators, finds the median of the values they reference and
-// returns an iterator to it. Values are not altered; return value is
-// always equal to one of the parameters. Has properties necessary for
-// stable sort.
-//
-// Does the same comparisons as an Insertion Sort of a 3-item list, but
-// does not modify the list.
-// Requirements on Types:
-//     Iter is an iterator type.
-// Pre:
-//     ai, bi, ci are valid iterators.
-template <typename Iter>
-Iter medianOf3(Iter ai, Iter bi, Iter ci)
-{
-    if (*bi < *ai)
-    {
-        if (*ci < *ai)
-            return (*ci < *bi) ? bi : ci;
-        else
-            return ai;
-    }
-    else
-    {
-        if (*ci < *bi)
-            return (*ci < *ai) ? ai : ci;
-        else
-            return bi;
-    }
-}
-
-
-// quicksort_recurse
-// Recursive helper function for quicksort. Nearly sorts a sequence,
-// down to level of SMALL_SIZE, using Quicksort optimized with
-// median-of-three and tail-recursion elimination on the larger
-// recursive call. Sublists of size SMALL_SIZE or smaller are not
-// sorted. Thus, returns data as nearly sorted, ready to be
-// finished with a call to Insertion Sort.
-// Recursive.
+// heapSort
+// Sort a range using Heap Sort.
 // Requirements on Types:
 //     RAIter is a random-access iterator type.
 //     operator< is a total order on the value type of RAIter.
 // Pre:
 //     [first, last) is a valid range.
+// Exception neutral. Throws what & when a value-type operation throws.
+// Basic guarantee.
+// If operator< and swap do not throw, then No-Throw Guarantee.
 template <typename RAIter>
-void quicksort_recurse(RAIter first, RAIter last)
+void heapSort(RAIter first, RAIter last)
 {
-    const size_t SMALL_SIZE = 37;  // Max size of "small" sublist
-                                   //  We do not sort these here
-
-    while (true)  // For tail-recursion elimination
-    {
-        size_t size = last - first;    // Size of range
-
-        // BASE CASE
-
-        if (size <= SMALL_SIZE)
-            return;
-
-        // RECURSIVE CASE
-
-        // Find median-of-three pivot and point pivotiter at it.
-        auto pivotiter = medianOf3(first, first+size/2, last-1);
-
-        // Do partition
-        hPartition(first, last, pivotiter);
-
-        // Two sorts, with larger "recursive call" done via iteration.
-        auto afterpivot = pivotiter + 1;  // Iter to item after pivot
-        if (pivotiter-first < last-afterpivot)
-        {
-            quicksort_recurse(first, pivotiter);
-            first = afterpivot;
-        }
-        else
-        {
-            quicksort_recurse(afterpivot, last);
-            last = pivotiter;
-        }
-        // quicksort_recurse(first, last);  // tail recursion eliminated
-    }
-}
-
-
-// quicksort
-// Sort a range, using Quicksort optimized with median-of-three
-// pivot selection, tail-recursion elimination on the larger
-// recursive call, and an Insertion Sort finish.
-// Calls recursive function.
-// Requirements on Types:
-//     RAIter is a random-access iterator type.
-//     operator< is a total order on the value type of RAIter.
-// Pre:
-//     [first, last) is a valid range.
-template <typename RAIter>
-void quicksort(RAIter first, RAIter last)
-{
-    // Get data nearly sorted
-    quicksort_recurse(first, last);
-
-    // Finish with Insertion Sort
-    insertionSort(first, last);
+    heapMake(first, last);
+    heapToSorted(first, last);
 }
 
 
@@ -292,7 +101,7 @@ void doSort(Iter first,
     // *********************************************************
     // * THE FOLLOWING MUST BE THE APPROPRIATE SORTING CALL!!! *
     // *********************************************************
-    quicksort(first, last);
+    heapSort(first, last);
 
     // Get ending time
     double endtime = timesec();

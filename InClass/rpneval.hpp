@@ -1,6 +1,7 @@
-// rpneval.hpp  UNFINISHED
+// rpneval.hpp
 // Glenn G. Chappell
-// 2023-10-31
+// 2023-11-01
+// Started: 2023-10-31
 //
 // For CS 311 Fall 2023
 // Header for rpnEval: Reverse Polish Notation evaluation
@@ -12,12 +13,15 @@
 
 #include <string>
 // For std::string
+// For std::stoi
 #include <stack>
 // For std::stack
 #include <cctype>
 // For std::isdigit
 #include <stdexcept>
-//for std::domain_error
+// For std::domain_error
+// For std::out_of_range
+// For std::overflow_error
 
 
 // Note on "inline"
@@ -82,55 +86,59 @@ bool isBinop(const std::string & str) noexcept
 //     "/" is integer division; x/0 throws.
 //     Result is left in top item on stack.
 //   Unknown command: throws.
+// May throw std::bad_alloc on out-of-memory, std::domain_error on
+// unknown command, std::out_of_range on stack underflow,
+// std::overflow_error on division by zero, and the exception thrown by
+// std::stoi (std::out_of_range or std::invalid_argument) on bad
+// string-to-number conversion.
 // Basic Guarantee
 inline
 void rpnEval(std::stack<int> & s,
              const std::string & token)
 {
-    if (token == "c" || token == "C") {
-
-        std::stack<int>().swap(s); //clears the value of s
+    if (token == "c" || token == "C")
+    {
+        std::stack<int>().swap(s);  // Clear stack
         return;
     }
 
-    if (isInteger(token)) {
+    if (isInteger(token))
+    {
         s.push(std::stoi(token));
         return;
     }
 
-    //since we still need to write out the binary operators, this is a way to check beforewe get there
     if (!isBinop(token))
     {
-        throw std::domain_error("unknown command: \"" + token + "\"");
+        throw std::domain_error("Unknown command: \"" + token + "\"");
     }
 
-    //now for building the binary operators required for this!
+    // We have a binary arithmetic operator: +, -, *, /
+
     if (s.size() < 2)
     {
-        //we have to have a size of atleast two to do any true operation within the stack
-        throw std::out_of_range("Stack overflow in \"" + token + "\" operation");
+        throw std::out_of_range("Stack underflow in \"" + token
+                              + "\" operation");
     }
 
-    //first we need to initialize two characters onto the stack that way we don't get a stack overflow error shown directly above
-    int a = s.top();
-    s.pop();
     int b = s.top();
+    s.pop();
+    int a = s.top();
     s.pop();
 
     if (token == "+")
         s.push(a + b);
     else if (token == "-")
-        s.push(b - a);
-    else if (token = "*")
+        s.push(a - b);
+    else if (token == "*")
         s.push(a * b);
-    else //token == "\"
+    else  // token == "/"
     {
         if (b == 0)
             throw std::overflow_error("Division by zero");
         else
             s.push(a / b);
     }
-       
 }
 
 

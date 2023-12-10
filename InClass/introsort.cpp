@@ -1,11 +1,14 @@
-// quicksort2.cpp
+// introsort.cpp
 // Glenn G. Chappell
-// Started: 2023-10-06
-// Updated: 2023-10-09
+// 2023-11-14
 //
 // For CS 311 Fall 2023
-// Quicksort
-// Implementation #2: Optimized
+// Introsort
+// Requires heap_algs.hpp
+// Based on quicksort2.cpp
+
+#include "heap_algs.hpp"
+// For Heap algorithms
 
 #include <iostream>
 using std::cout;
@@ -26,6 +29,8 @@ using std::begin;
 using std::end;
 #include <algorithm>
 using std::iter_swap;
+#include <cmath>
+using std::log2;
 #include <chrono>
 // Everything from <chrono> is preceded by std::
 #include <cassert>
@@ -37,6 +42,27 @@ const size_t BIGSIZE = 100'000'000;
 
 // Values in datasets range from 0 to MAXVAL
 const int MAXVAL = 999'999'999;
+
+
+// Function heapSort copied from file heap_sort.cpp
+
+// heapSort
+// Sort a range using Heap Sort.
+// Requirements on Types:
+//     RAIter is a random-access iterator type.
+//     operator< is a total order on the value type of RAIter.
+// Pre:
+//     [first, last) is a valid range.
+// Exception neutral. Throws what & when a value-type operation throws.
+// Basic guarantee.
+// If operator< and swap do not throw, then No-Throw Guarantee.
+template <typename RAIter>
+void heapSort(RAIter first, RAIter last)
+{
+    heapMake(first, last);
+    heapToSorted(first, last);
+}
+
 
 
 // Function insertionSort copied from file insertion_sort.cpp
@@ -174,13 +200,13 @@ Iter medianOf3(Iter ai, Iter bi, Iter ci)
 }
 
 
-// quicksort_recurse
-// Recursive helper function for quicksort. Nearly sorts a sequence,
-// down to level of SMALL_SIZE, using Quicksort optimized with
-// median-of-three and tail-recursion elimination on the larger
-// recursive call. Sublists of size SMALL_SIZE or smaller are not
-// sorted. Thus, returns data as nearly sorted, ready to be
-// finished with a call to Insertion Sort.
+// introsort_recurse
+// Recursive helper function for introsort. Nearly sorts a sequence,
+// down to level of SMALL_SIZE, using Introsort optimized with
+// median-of-three and tail-recursion elimination on one recursive call.
+// Sublists of size SMALL_SIZE or smaller are not sorted. Thus, returns
+// data as nearly sorted, ready to be finished with a call to Insertion
+// Sort.
 // Recursive.
 // Requirements on Types:
 //     RAIter is a random-access iterator type.
@@ -188,7 +214,7 @@ Iter medianOf3(Iter ai, Iter bi, Iter ci)
 // Pre:
 //     [first, last) is a valid range.
 template <typename RAIter>
-void quicksort_recurse(RAIter first, RAIter last)
+void introsort_recurse(RAIter first, RAIter last, int depth)
 {
     const size_t SMALL_SIZE = 37;  // Max size of "small" sublist
                                    //  We do not sort these here
@@ -204,31 +230,36 @@ void quicksort_recurse(RAIter first, RAIter last)
 
         // RECURSIVE CASE
 
-        // Find median-of-three pivot and point pivotiter at it.
+        // If we have exceeded the depth limit, switch to Heap Sort.
+        if (depth == 0)
+        {
+            heapSort(first, last);
+            return;
+        }
+
+        // Find median-of-three pivot and point pivotiter at it. We do
+        //  the same comparisons as an Insertion Sort of a 3-item list,
+        //  but we do not modify the list.
         auto pivotiter = medianOf3(first, first+size/2, last-1);
 
         // Do partition
         hPartition(first, last, pivotiter);
 
-        // Two sorts, with larger "recursive call" done via iteration.
-        auto afterpivot = pivotiter + 1;  // Iter to item after pivot
-        if (pivotiter-first < last-afterpivot)
-        {
-            quicksort_recurse(first, pivotiter);
-            first = afterpivot;
-        }
-        else
-        {
-            quicksort_recurse(afterpivot, last);
-            last = pivotiter;
-        }
-        // quicksort_recurse(first, last);  // tail recursion eliminated
+        // Two sorts, with second "recursive call" done via iteration.
+        // Note. In an optimized Quicksort, we make sure to do the
+        // LARGER recursive call via iteration. In Introsort, due to the
+        // depth limit, we do not need to worry about this.
+        --depth;
+        introsort_recurse(first, pivotiter, depth);
+
+        // Set up params for tail-recursion elim
+        first = pivotiter + 1;
     }
 }
 
 
-// quicksort
-// Sort a range, using Quicksort optimized with median-of-three
+// introsort
+// Sort a range, using Introsort optimized with median-of-three
 // pivot selection, tail-recursion elimination on the larger
 // recursive call, and an Insertion Sort finish.
 // Calls recursive function.
@@ -238,10 +269,17 @@ void quicksort_recurse(RAIter first, RAIter last)
 // Pre:
 //     [first, last) is a valid range.
 template <typename RAIter>
-void quicksort(RAIter first, RAIter last)
+void introsort(RAIter first, RAIter last)
 {
+    // Compute depth limit
+    auto size = last-first;
+    if (size <= 1)
+        return;  // So we don't compute log of small number
+    int depth = int(2. * log2(double(size)));
+                 // Depth limit recommended by D. Musser: 2 log_2(n)
+
     // Get data nearly sorted
-    quicksort_recurse(first, last);
+    introsort_recurse(first, last, depth);
 
     // Finish with Insertion Sort
     insertionSort(first, last);
@@ -292,7 +330,7 @@ void doSort(Iter first,
     // *********************************************************
     // * THE FOLLOWING MUST BE THE APPROPRIATE SORTING CALL!!! *
     // *********************************************************
-    quicksort(first, last);
+    introsort(first, last);
 
     // Get ending time
     double endtime = timesec();
